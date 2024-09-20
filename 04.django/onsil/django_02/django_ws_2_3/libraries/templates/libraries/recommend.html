@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>주목할 만한 신간 도서 목록</h1>
+  {% comment %} <p>{{ books_info }}</p> {% endcomment %}
+  <div>
+    {% for book in books_info %}
+        <p>제목: {{ book.title }}</p>
+        <p>저자: {{ book.author }}</p>
+        <hr>
+    {% endfor %}
+  </div>
+
+  {% comment %} <div>
+    {% for title, author in books_info %}
+      <p>{{ title }} : {{ author }}</p>
+    {% endfor %}
+  </div> {% endcomment %}
+</body>
+</html>
