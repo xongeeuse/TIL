@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>주차정보시스템</h1>
+  <p>location이 독도인 차고지를 출력합니다.</p>
+  <p>{{ in_dokdo }}</p>
+  <hr>
+
+  <p>현재 capacity가 30 이하인 차고지 출력합니다.</p>
+  <p>{{ under_thirty }}</p>
+  <hr>
+
+  <p>현재 주차 가능 여부가 True인 차고지 조회하고 각 location 출력</p>
+  {% comment %} <p>일단 리스트 출력 => {{ availables }}</p> {% endcomment %}
+
+  <p>{% for available in availables %}
+    <li>{{ available.location }}</li>
+    {% endfor %}</p>
+
+
+</body>
+</html>
