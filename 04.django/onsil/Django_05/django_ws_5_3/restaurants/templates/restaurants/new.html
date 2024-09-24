@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>식당 생성 페이지</h1>
+
+  {% comment %} <form action="{% url 'restaurants:create' %}" method="POST">
+    {% csrf_token %}
+    <label for="name">식당 이름 : </label>
+    <input type="text" id="name" name="name"> <br>
+    <label for="description">식당 설명 : </label>
+    <input type="text" id="description" name="description"> <br>
+    <label for="address">식당 주소 : </label>
+    <textarea name="address" id="address" cols="30" rows="10"></textarea> <br>
+    <label for="phone_number">식당 전화번호 : </label>
+    <textarea name="phone_number" id="phone_number" cols="30" rows="10"></textarea> <br>
+
+    <input type="submit" value="CREATE"> 
+
+    <button type="submit" class="btn btn-primary">CREATE</button>
+  </form> {% endcomment %}
+
+    
+    <form action="{% url 'restaurants:create' %}" method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="name" class="form-label">이름 : </label>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">주소 : </label>
+        <input type="text" class="form-control" id="address" name="address" aria-describedby="addressHelp">
+        <div id="addressHelp" class="form-text">주소는 OO시 OO구 OO동 형식으로 작성합니다.</div>
+      </div>
+      <div class="mb-3">
+        <label for="phone_number" class="form-label">전화번호 : </label>
+        <input type="text" class="form-control" name="phone_number" id="phone_number" aria-describedby="phone_numberHelp">
+        <div id="phone_numberHelp" class="form-text">전화번호는 특수문자 없이 지역번호를 포함한 숫자만 입력합니다.</div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">식당 소개</label>
+        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+      </div>
+    
+      <button type="submit" class="btn btn-primary">CREATE</button>
+    </form>
+    
+  <a href="{% url 'restaurants:index' %}">[BACK]</a>
+{% endblock content %}
+
+
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">맛집 리스트</h1>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="{% url 'restaurants:new' %}">
+      <button type="button" class="btn btn-dark">맛집 추가할래요!</button>
+    </a>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for restaurant in restaurants %}
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+          {% comment %} <img src="https://peterluger.com/cdn/shop/files/1600x1600-min.jpg?v=1718291970&width=540" class="card-img-top" alt="..."> {% endcomment %}
+          <div class="card-body">
+            <h5 class="card-title">{{ restaurant.name }}</h5>
+            <p class="card-text">Location: {{ restaurant.address }}</p>
+            <a href="{% url 'restaurants:detail' restaurant.pk %}" class="btn btn-primary">details</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+{% endblock content %}

@@ -7,10 +7,14 @@
 </head>
 <body>
   <h1>Articles</h1>
+  <a href="{% url "articles:new" %}">NEW</a>
   {% comment %} <p>{{ articles }}</p> {% endcomment %}
   {% for article in articles %}
     <p>글 번호: {{ article.pk }}</p>
-    <p>글 제목: {{ article.title }}</p>
+    {% comment %} 반복 돌면서 url태그에 변수 넣어주기 공백 기준으로 나열 가능 {% endcomment %}
+    <a href="{% url "articles:detail" article.pk %}">
+      <p>글 제목: {{ article.title }}</p>
+    </a>
     <p>글 내용: {{ article.content }}</p>
     <hr>
   {% endfor %}
