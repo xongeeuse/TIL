@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class='text-center'>DETAIL</h1>
+<h2 class='text-center'>{{ travel.pk }}번째 글</h2>
+<hr>
+<p>장소 : {{ travel.location }}</p>
+<p>계획 : {{ travel.plan }}</p>
+<p>시작일 : {{ travel.start_date }}</p>
+<p>종료일 : {{ travel.end_date }}</p>
+<hr>
+<a href="{% url "travels:index" %}">[back]</a>
+{% endblock content %}

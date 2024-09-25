@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Travels</h1>
+<a href="{% url "travels:create" %}" method='GET'>
+  <button type="button" class="btn btn-dark">CREATE</button>
+</a>
+<hr>
+<ul>
+  {% for travel in travels %}
+  <li>
+    <a href="{% url "travels:detail" travel.pk %}" method="GET">
+    <p>location : {{ travel.location }}</p>
+    </a>
+    <p>plan : {{ travel.plan }}</p>
+  </li>
+  <hr>
+  {% endfor %}
+</ul>
+{% endblock content %}
