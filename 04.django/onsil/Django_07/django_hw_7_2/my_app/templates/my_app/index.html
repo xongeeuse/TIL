@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Index 페이지입니다.</h1>
+<a href="{% url "my_app:create" %}">[사진을 등록하려면 누르세요!]</a>
+
+<p>기본 경로에서 불러온 이미지</p>
+<img src="{% static "my_app/moon.jpg" %}" width="300" alt="moon">
+
+<hr>
+
+<p>추가 경로에서 불러온 이미지</p>
+<img src="{% static "earth.jpg" %}" width="300" alt="earth">
+
+{% endblock content %}

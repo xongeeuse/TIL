@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>나만의 SNS 서비스</h1>
+<a href="{% url "articles:create" %}">[CREATE]</a>
+
+<div>
+  {% for article in articles %}
+    {% if article.image  %}
+    <img src="{{ article.image.url }}" alt="{{ alticle.title }}" width="300">
+    {% else %}
+    <p>No images</p>
+    {% endif %}
+    <a href="{% url "articles:detail" article.pk %}">
+      <p>{{ article.title }}</p>
+    </a>
+    <hr>
+  {% endfor %}
+</div>
+{% endblock content %}
