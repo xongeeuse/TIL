@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>영화 상세 페이지</h1>
+{% if movie.image %}
+  <img src="{{ movie.image.url }}" style="max-width: 300px;" alt="image error">
+{% else %}
+  <img src="{% static "noimage.png" %}" style="max-width: 300px; max-height: 300px;" alt="noimage">
+  <p>No images</p>
+ {% endif %}
+<img src="" alt="">
+<p>{{ movie.title }}</p>
+<p>{{ movie.plot }}</p>
+<hr>
+
+<a href="{% url "movies:update" movie.pk %}">
+  <button type="button" class="btn btn-secondary">UPDATE</button>
+</a>
+
+<form action={% url "movies:delete" movie.pk %} method="POST">
+  {% csrf_token %}
+  <button type="button" class="btn btn-secondary">DELETE</button>
+</form>
+
+<hr>
+<a href="{% url "movies:index" %}"><button type="button" class="btn btn-primary">BACK</button>
+</a>
+{% endblock content %}

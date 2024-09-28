@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>메인 페이지</h1>
+
+<a href="{% url "movies:create" %}">
+  <button type="button" class="btn btn-outline-dark">CREATE</button>
+</a>
+
+{% for movie in movies %}
+<p>제목 : {{ movie.title }}</p>
+<p>줄거리 : {{ movie.plot }}</p>
+{% if movie.image %}
+  <img src="{{ movie.image.url }}" style="max-width: 300px;" alt="image error">
+{% else %}
+  <p>등록된 포스터가 없습니다.</p>
+ {% endif %}
+<a href="{% url "movies:detail" movie.pk %}">
+  <button type="button" class="btn btn-dark">Detail</button>
+</a>
+
+
+{% endfor %}
+
+{% endblock content %}
