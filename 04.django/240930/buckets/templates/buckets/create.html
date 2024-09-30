@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>새로운 여행지 버킷리스트 작성</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">[CREATE]</button>
+  </form>
+  <a href="{% url 'buckets:index' %}">[BACK]</a>
+{% endblock content %}
+
