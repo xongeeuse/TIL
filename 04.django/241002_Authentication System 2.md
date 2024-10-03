@@ -1,4 +1,4 @@
-# 241002_Authentication System 2
+# 241002_Authentication System_2
 
 ## 회원 가입
 - User 객체를 Create하는 과정
