@@ -1,7 +1,7 @@
 # articles/models.py
 from django.db import models
 from django.conf import settings
-from accounts.models import User
+# from accounts.models import User
 
 # Article (N) : User (1)
 class Article(models.Model):
