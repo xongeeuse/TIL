@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Details</h1>
+
+<p>등록 번호 : {{ author.pk }}</p>
+<p>이름 : {{ author.name }}</p>
+<p>나이 : {{ author.age }}</p>
+<p>생년월일 : {{ author.birth }}</p>
+<p>국적 : {{ author.nationality }}</p>
+
+<hr>
+<a href="{% url "libraries:index" %}">[BACK]</a>
+
+{% endblock content %}

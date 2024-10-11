@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>저자 전체 목록</h1>
+  <ul>
+    {% for author in authors %}
+      <a href="{% url 'libraries:detail' author.pk %}">
+        <li>이름 : {{ author.name }}</li>
+        <li>국적 : {{ author.nationality }}</li>
+        <li>집필 권수 : {{ author.book_set.all|length }}권 </li>
+      </a>
+      <hr>
+    {% empty %}
+      <p>등록된 저자가 없습니다.</p>
+    {% endfor %}
+  </ul>
+{% endblock content %}
