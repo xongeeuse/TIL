@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>{{ person.username }}님의 프로필</h1>
+  <div>
+    팔로잉 : {{ person.followings.all|length }} / 팔로워 : {{ person.followers.all|length }}
+  </div>
+  {% if request.user != person %}
+  <div>
+    <form action="{% url "accounts:follow" person.pk %}" method="POST">
+      {% csrf_token %}
+      {% if request.user in person.followers.all %}
+        <input type="submit" value="Unfollow">
+      {% else %}
+        <input type="submit" value="Follow">
+      {% endif %}
+    </form>
+  </div>
+  {% endif %}
+
+  <h1>{{ person.username }}님이 작성한 게시글</h1>
+  <ul>
+    {% for article in person.article_set.all %}
+      <li>{{ article }}</li>
+    {% empty %}
+      <p>작성한 게시글이 없습니다.</p>
+    {% endfor %}
+  </ul>
+  <h1>{{ person.username }}님이 작성한 댓글</h1>
+  <ul>
+    {% for comment in person.comment_set.all %}
+      <li>{{ comment }}</li>
+    {% empty%}
+      <p>작성한 댓글이 없습니다.</p>
+    {% endfor %}
+  </ul>
+  <h1>{{ person.username }}님이 좋아요한 게시글</h1>
+    <p>{{ person.like_articles.all | length}}개</p>
+  <ul>
+    {% for like_article in person.like_articles.all %}
+      <li>{{ like_article }}</li>
+    {% empty %}
+      <p>좋아요한 게시글이 없습니다.</p>
+      {% endfor %}
+  </ul>
+</body>
+</html>

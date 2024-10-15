@@ -1,0 +1,46 @@
+[
+{
+    "model": "articles.comment",
+    "pk": 1,
+    "fields": {
+        "article": 3,
+        "user": 2,
+        "content": "댁굴",
+        "created_at": "2024-10-15T00:35:11.178Z",
+        "updated_at": "2024-10-15T00:35:11.178Z"
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 2,
+    "fields": {
+        "article": 3,
+        "user": 2,
+        "content": "댓글2",
+        "created_at": "2024-10-15T00:39:33.625Z",
+        "updated_at": "2024-10-15T00:39:33.625Z"
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 3,
+    "fields": {
+        "article": 1,
+        "user": 2,
+        "content": "또 왔서요",
+        "created_at": "2024-10-15T00:39:42.880Z",
+        "updated_at": "2024-10-15T00:39:42.880Z"
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 4,
+    "fields": {
+        "article": 2,
+        "user": 3,
+        "content": "어머어머",
+        "created_at": "2024-10-15T01:20:56.615Z",
+        "updated_at": "2024-10-15T01:20:56.615Z"
+    }
+}
+]
