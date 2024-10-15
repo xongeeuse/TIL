@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ profile_owner.username }}님의 프로필 페이지 입니다!</h1>
+  {% if profile_owner.email %}
+    <p>문의 메일 : {{ profile_owner.email }}</p>
+  {% else %}
+    <p>아직 이메일을 작성하지 않았습니다.</p>
+  {% endif %}
+  <hr>
+
+  {% if request.user == profile_owner %}
+    <a href="{% url "accounts:update" %}">[USER_UPDATE]</a>
+    
+    <form action="{% url "accounts:delete" %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="[SIGNOUT]">
+    </form>
+
+  {% else %}
+  <form action="{% url "accounts:subscribe" profile_owner.pk %}" method="POST">
+    {% csrf_token %}
+    {% if request.user not in profile_owner.subscriber.all %}
+      <input type="submit" value="구독">
+    {% else %}
+      <input type="submit" value="구독 취소">
+    {% endif %}
+  </form>
+  {% endif %}
+  <hr>
+  <h3>{{ profile_owner.username }}님이 선택한 사진들</h3>
+  <ul>
+    {% for diary in like_diaries %}
+      <li>
+        {% if diary.picture %}
+          <img src="{{ diary.picture.url }}" alt="{{ diary.picture }}">
+        {% endif %}
+        <p>{{ diary.content }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}

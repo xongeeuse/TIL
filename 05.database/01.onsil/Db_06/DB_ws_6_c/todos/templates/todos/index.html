@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>할 일 목록 관리 프로젝트 메인 페이지</h1>
+  <p>이 곳에서 할 일 목록을 관리합니다.</p>
+  <ul>
+    {% for todo in todo_list %}
+    <li>
+        {% if request.user != todo.user %}
+          <form action="{% url "todos:recommend" todo.pk %}" method="POST">
+            {% csrf_token %}
+            {% if request.user in  todo.recommend_users.all %}
+              <input type="submit" value="★">
+            {% else %}
+              <input type="submit" value="☆">
+            {% endif %}
+          </form>
+        {% endif %}
+        <p>작 성 : <a href="{% url "accounts:profile" todo.user.username %}">{{ todo.user.username }}</a></p>
+        <input type="checkbox" value="{{ todo.is_completed }}" {% if todo.is_completed %}checked{% endif %}>
+        <a href="{% url "todos:detail" todo.pk %}">{{ todo.work }}</a>
+      </li>
+    {% empty %}
+      <li>아직 할 일이 없습니다.</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

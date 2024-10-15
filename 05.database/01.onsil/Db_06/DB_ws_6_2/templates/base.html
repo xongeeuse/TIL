@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>241015 ONSIL</title>
+</head>
+<body>
+  {% if request.user.is_authenticated %}
+    <h3>{{ request.user.username }}님, 반 가 와!!!!!!!!</h3>
+    <form action="{% url "accounts:logout" %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="LOGOUT">
+    </form>
+    <form action="{% url "accounts:delete" %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="탈퇴할래">
+    </form>
+  {% else %}
+    <h3>Guest님, 로그인 하쉴~~~~~~~~~~~?!</h3>
+    <a href="{% url "accounts:login" %}"><button class="cta-button">Login</button></a>
+    <a href="{% url "accounts:signup" %}"><button class="cta-button">Sign Up</button></a>
+  {% endif %}
+
+  {% block content %}
+  {% endblock content %}
+</body>
+</html>
