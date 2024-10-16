@@ -1,0 +1,32 @@
+[
+{
+    "model": "artists.artist",
+    "pk": 1,
+    "fields": {
+        "name": "111",
+        "agency": "모름쓰",
+        "debut_date": "2020-09-18",
+        "is_group": false
+    }
+},
+{
+    "model": "artists.artist",
+    "pk": 2,
+    "fields": {
+        "name": "222",
+        "agency": "몰라요",
+        "debut_date": "2020-04-18",
+        "is_group": false
+    }
+},
+{
+    "model": "artists.artist",
+    "pk": 3,
+    "fields": {
+        "name": "333",
+        "agency": "몰라요",
+        "debut_date": "2012-01-18",
+        "is_group": false
+    }
+}
+]
