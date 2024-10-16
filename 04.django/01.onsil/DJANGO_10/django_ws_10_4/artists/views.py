@@ -30,7 +30,7 @@ def artist_detail(request, artist_pk):
     elif request.method == 'PUT':
         serializer = ArtistUpdateSerializer(artist, data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer = ArtistSerializer(serializer.save())
             return Response(serializer.data)
     
     elif request.method == 'DELETE':
