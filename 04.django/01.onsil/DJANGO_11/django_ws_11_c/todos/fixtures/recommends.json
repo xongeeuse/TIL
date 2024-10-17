@@ -1,0 +1,18 @@
+[
+{
+    "model": "todos.recommend",
+    "pk": 1,
+    "fields": {
+        "todo": 1,
+        "content": "django 좋아요"
+    }
+},
+{
+    "model": "todos.recommend",
+    "pk": 2,
+    "fields": {
+        "todo": 1,
+        "content": "djago 같이 공부해요"
+    }
+}
+]
