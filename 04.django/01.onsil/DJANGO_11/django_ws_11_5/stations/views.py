@@ -5,7 +5,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from .models import Location, Station, Car
 from .serializers import LocationSerializer, StationListSerializer, StationSerializer, CarSerializer, CarUpdateSerializer
 
-# Create your views here.
+
 @api_view(['POST'])
 def location_create(request):
     if request.method == 'POST':
