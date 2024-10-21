@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    console.log(name) // undefined => 선언 이전에 참조
+    var name = '홍길동' // 선언
+
+    // 위 코드를 암묵적으로 아래와 같이 이해함
+    var name // undefined 로 초기화
+    console.log(name)
+    var name = '홍길동'
+
+    // let, const도 호이스팅이 발생하지만 TDZ(Temporal Dead Zone) 때문에 에러 발생
+    // TDZ는 선언 전에 변수에 접근하는 것을 금지
+    console.log(age) // ReferenceError: Cannot access 'age' before initialization
+    let age = 30
+
+    console.log(height) // ReferenceError: Cannot access 'height' before initialization
+    const height = 170
+  </script>
+</body>
+
+</html>
