@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+  <body>
+    <div>
+      <p>DOM 요소 조작</p>
+    </div>
 
-<body>
-  <div>
-    <p>DOM 요소 조작</p>
-  </div>
+    <script>
+      // 생성
+      const h1Tag = document.createElement("h1");
+      // console.log(h1Tag);
+      h1Tag.textContent = "제목";
+      console.log(h1Tag);
 
-  <script>
-    // 생성
-    
+      // 추가
+      // 1. 부모가 될 div 태그 선택
+      const divTag = document.querySelector("div");
+      // 2. div 태그의 자식 Nodelist 중 마지막 자식으로 삽입
+      divTag.appendChild(h1Tag);
+      // 3. 출력
+      console.log(divTag);
 
-    // 추가
-    
-
-    // 삭제
-    
-  </script>
-</body>
-
+      // 삭제
+      const pTag = document.querySelector("p");
+      divTag.removeChild(pTag);
+      console.log(divTag);
+    </script>
+  </body>
 </html>

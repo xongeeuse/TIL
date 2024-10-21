@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <title>나의 포트폴리오</title>
+  </head>
+  <body>
+    <h1>안녕하세요, 제 이름은 <b id="name">홍길동</b>입니다.</h1>
+
+    <img src="" alt="" width="200" />
+
+    <h2>소개</h2>
+    <p>
+      저는 <b id="job">[직업/전공]</b>으로 일하고 있습니다.
+      <b id="experience">[간단한 경력/학력]</b>을 가지고 있으며,
+      <b>[특기 또는 관심 분야]</b>에 대해 꾸준히 공부하고 있습니다.
+    </p>
+
+    <h2>프로젝트</h2>
+    <ul id="list-group">
+      <li>
+        <b>프로젝트 1:</b> <span class="project-1">[프로젝트 1 제목]</span>
+      </li>
+      <li>
+        <b>프로젝트 2:</b> <span class="project-2">[프로젝트 2 제목]</span>
+      </li>
+      <li>
+        <b>프로젝트 3:</b> <span class="project-3">[프로젝트 3 제목]</span>
+      </li>
+    </ul>
+
+    <h2>연락처</h2>
+    <p>이메일: <b id="email">[이메일 주소]</b></p>
+    <p>전화번호: <b id="phone">[전화번호]</b></p>
+
+    <script>
+      const name = document.querySelector("#name");
+      const job = document.querySelector("#job");
+      const experience = document.querySelector("#experience");
+      const email = document.querySelector("#email");
+      const phone = document.querySelector("#phone");
+
+      name.textContent = "홍길동";
+      job.textContent = "의적";
+      experience.textContent = "서당";
+      email.textContent = "hgd@korea";
+      phone.textContent = "010-1234-1234";
+
+      const img = document.querySelector("img");
+      img.setAttribute("src", "profile.jpg");
+      img.setAttribute("alt", "프로필 사진");
+
+      const bodyTag = document.querySelector("body");
+      // console.log(bodyTag.classList);
+      bodyTag.classList.add("container");
+
+      const h1Tag = document.querySelector("h1");
+      h1Tag.classList.add("title");
+
+      const imgTag = document.querySelector("img");
+      imgTag.classList.add("img");
+
+      const sns = document.createElement("p");
+      sns.innerHTML = "SNS: <b id='sns'>[sns주소]</b>";
+
+      document.body.appendChild(sns);
+
+      const snsId = document.querySelector("#sns");
+      snsId.textContent = "@honggildong";
+
+      const arr = ["name", "job", "experience", "email", "phone", "sns"];
+
+      for (let index = 0; index < arr.length; index++) {
+        const element = document.querySelector("#" + arr[index]);
+        element.classList.add("highlight");
+      }
+    </script>
+  </body>
+</html>
