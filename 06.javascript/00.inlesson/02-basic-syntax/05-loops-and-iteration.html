@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // while
+      let i = 0;
+
+      // for
+
+      // for...in
+      const object = {
+        a: "apple",
+        b: "banana",
+      };
+
+      for (const property in object) {
+        console.log(property);
+        console.log(object[property]);
+      }
+
+      // for...of
+      const numbers = [0, 1, 2, 3];
+
+      const myStr = "apple";
+
+      // for...in 과 for...of 의 차이
+      const arr = ["a", "b", "c"];
+
+      for (const i in arr) {
+        console.log(i); // 0, 1, 2
+      }
+
+      for (const i of arr) {
+        console.log(i); // a, b, c
+      }
+    </script>
+  </body>
+</html>

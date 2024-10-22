@@ -9,16 +9,21 @@
 
 <body>
   <script>
-    console.log(name) // undefined => 선언 이전에 참조
+    // 호이스팅으로 인해 선언이 끌어 올려지게 되어 선언 이전에 참조가 가능하게된 현상
+    // var는 선언과 초기화(undefined)가 동시에 이루어짐
+    console.log(name) // undefined
     var name = '홍길동' // 선언
 
     // 위 코드를 암묵적으로 아래와 같이 이해함
-    var name // undefined 로 초기화
+    var name // undefined로 초기화
     console.log(name)
     var name = '홍길동'
 
     // let, const도 호이스팅이 발생하지만 TDZ(Temporal Dead Zone) 때문에 에러 발생
-    // TDZ는 선언 전에 변수에 접근하는 것을 금지
+    // TDZ
+    // - 변수가 선언된 시점부터 초기화되기 전까지의 구간
+    // - let과 const는 선언 -> 초기화 -> 할당이 각각 일어남
+    // - TDZ는 선언 전에 변수에 접근하는 것을 금지 (코드의 예측 가능성과 안정성을 높이는 역할을 함)
     console.log(age) // ReferenceError: Cannot access 'age' before initialization
     let age = 30
 

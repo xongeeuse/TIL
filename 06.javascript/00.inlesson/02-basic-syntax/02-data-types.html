@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 원시 자료형
+    const a = 'bar'
+    console.log(a) // bar
+
+    console.log(a.toUpperCase()) // BAR
+    console.log(a) // bar
+
+    let b = 10
+    let c = b
+    c = 20
+    console.log(b) // 10
+    console.log(c) // 20
+
+
+    // 참조 자료형
+    const arr1 = [1, 2, 3]
+    const arr2 = arr1
+    arr2.push(4)
+
+    console.log(arr1) // [1, 2, 3, 4]
+    console.log(arr2) // [1, 2, 3, 4]
+
+    const obj1 = { name: 'Alice', age: 30 }
+    const obj2 = obj1
+    obj2.age = 40
+
+    console.log(obj1.age) // 40
+    console.log(obj2.age) // 40
+  </script>
+</body>
+
+</html>
