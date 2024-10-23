@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      const students = [
+        { name: "Alice", scores: [85, 90, 95] },
+        { name: "Bella", scores: [50, 80, 80] },
+        { name: "Caley", scores: [90, 55, 35] },
+        { name: "Dave", scores: [100, 100, 100] },
+        { name: "Eve", scores: [88, 90, 92] },
+      ];
+      // 아래에 코드 작성
+      const makeAvgScores1 = function () {
+        const avgs = {};
+        for (let i = 0; i < students.length; i++) {
+          let sum = 0;
+          for (let j = 0; j < students[i].scores.length; j++) {
+            sum += students[i].scores[j];
+          }
+          avgs[students[i].name] = sum / students[i].scores.length;
+        }
+        return avgs;
+      };
+
+      const makeAvgScores2 = function () {
+        const avgs = {};
+
+        for (let student of students) {
+          let sum = 0;
+          for (let score of student.scores) {
+            sum += score;
+          }
+          // console.log(`${student.name}: ${sum / student.scores.length}`);
+          avgs[student.name] = sum / student.scores.length;
+        }
+        return avgs;
+      };
+
+      const makeAvgScores3 = function () {
+        const avgs = {};
+        students.forEach((student) => {
+          const sum = student.scores.reduce((acc, score) => acc + score, 0);
+          const avg = sum / student.scores.length;
+          avgs[student.name] = avg;
+        });
+        return avgs;
+      };
+      // 함수 호출
+      const result1 = makeAvgScores1(students);
+      const result2 = makeAvgScores2(students);
+      const result3 = makeAvgScores3(students);
+      console.log(result1);
+      console.log(result2);
+      console.log(result3);
+    </script>
+  </body>
+</html>

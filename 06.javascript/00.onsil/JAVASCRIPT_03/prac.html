@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const numbers = [1, 2, 3, 4];
+      const sum = numbers.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      }, 0);
+
+      console.log(sum);
+
+      const items = [
+        { name: "Apple", price: 50 },
+        { name: "Banana", price: 30 },
+        { name: "Cherry", price: 20 },
+      ];
+
+      const totalPrice = items.reduce((acc, item) => {
+        return acc + item.price;
+      }, 0);
+      console.log(totalPrice);
+
+      const students = [
+        { name: "Alice", scores: [85, 90, 95] },
+        { name: "Bella", scores: [50, 80, 80] },
+        { name: "Caley", scores: [90, 55, 35] },
+        { name: "Dave", scores: [100, 100, 100] },
+        { name: "Eve", scores: [88, 90, 92] },
+      ];
+
+      const makeAvgs = function () {
+        const avgs = {};
+        students.forEach((student) => {
+          const sum = student.scores.reduce((total, score) => total + score, 0);
+          const avg = sum / student.scores.length;
+          avgs[student.name] = avg;
+        });
+        return avgs;
+      };
+      console.log(makeAvgs());
+    </script>
+  </body>
+</html>
