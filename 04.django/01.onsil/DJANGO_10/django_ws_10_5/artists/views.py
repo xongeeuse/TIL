@@ -36,7 +36,8 @@ def artist_detail(request, artist_pk):
     elif request.method == 'DELETE':
         artist.delete()
         data = {
-            'delete': f'등록 번호 {artist_pk} 번의 {artist.name}을 삭제하였습니다.'
+            # 'delete': f'등록 번호 {artist.pk} 번의 {artist.name}을/를 삭제하였습니다.',
+            'delete': f'등록 번호 {artist_pk} 번의 {artist.name}을/를 삭제하였습니다.'
         }
         return Response(data, status=status.HTTP_204_NO_CONTENT)
 
