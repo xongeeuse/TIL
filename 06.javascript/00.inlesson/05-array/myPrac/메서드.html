@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const numbers = [1, 2, 3, 4, 5];
+      // 결과: [1, 4, 9, 16, 25]
+
+      // const numbersDouble = numbers.map(function (number) {
+      //   return number ** 2;
+      // });
+      const numbersDouble = numbers.map((number) => number ** 2);
+      console.log(numbersDouble);
+
+      const numbers2 = [10, 15, 20, 25, 30];
+      // 결과: [15, 25]
+
+      const oddNums = numbers2.filter((number) => number % 2 === 1);
+      console.log(oddNums);
+
+      const products = [
+        { id: 1, name: "펜", price: 500 },
+        { id: 2, name: "노트북", price: 1500 },
+        { id: 3, name: "책", price: 800 },
+      ];
+      // 결과: { id: 2, name: '노트북', price: 1500 }
+      const selected = products.find((product) => product.price >= 1000);
+      console.log(selected);
+      console.log(selected.name);
+
+      const classes = [
+        [55, 60, 65, 70],
+        [40, 45, 50, 55],
+        [80, 85, 90, 95],
+      ];
+
+      classes.forEach((scores, index) => {
+        if (scores.some((score) => score >= 60)) {
+          console.log(`Class ${index + 1}: 합격자 있음`);
+        } else {
+          console.log(`Class ${index + 1}: 합격자 없음`);
+        }
+      });
+
+      // some 결과를 변수에 넣은 ver.
+      // classes.forEach((scores, index) => {
+      //   const passed = scores.some((score) => score >= 60);
+      //   if (passed) {
+      //     console.log(`Class ${index + 1}: 합격자 있음`);
+      //   } else {
+      //     console.log(`Class ${index + 1}: 합격자 없음`);
+      //   }
+      // });
+
+      // 삼항연산자 ver.
+      classes.forEach((scores, index) => {
+        const passed = scores.some((score) => score >= 60);
+        console.log(
+          `Class ${index + 1}: ${passed ? "합격자 있음" : "합격자 없음"}`
+        );
+      });
+
+      // 출력:
+      // Class 1: 합격자 있음
+      // Class 2: 합격자 없음
+      // Class 3: 합격자 있음
+
+      const teamProjects = [
+        { team: "A", projects: [true, true, true] },
+        { team: "B", projects: [true, false, true] },
+        { team: "C", projects: [true, true, true] },
+      ];
+
+      teamProjects.forEach((team) => {
+        const isCompleted = team.projects.every((project) => project);
+        console.log(
+          `Team ${team.team}:${
+            isCompleted ? "모든 프로젝트 완료" : "진행 중인 프로젝트 있음"
+          }`
+        );
+      });
+
+      // 출력:
+      // Team A: 모든 프로젝트 완료
+      // Team B: 진행 중인 프로젝트 있음
+      // Team C: 모든 프로젝트 완료
+
+      const departments = [
+        {
+          name: "개발팀",
+          employees: [
+            { name: "김개발", salary: 5500 },
+            { name: "이코딩", salary: 4800 },
+          ],
+        },
+        {
+          name: "디자인팀",
+          employees: [
+            { name: "박디자인", salary: 4200 },
+            { name: "최그래픽", salary: 3800 },
+          ],
+        },
+        {
+          name: "마케팅팀",
+          employees: [
+            { name: "정마케팅", salary: 5200 },
+            { name: "강홍보", salary: 4900 },
+          ],
+        },
+      ];
+
+      departments.forEach((department) => {
+        const highSalary = department.employees.some(
+          (employee) => employee.salary >= 5000
+        );
+        console.log(
+          `${department.name}: ${
+            highSalary ? "고연봉 직원 있음" : "고연봉 직원 없음"
+          }`
+        );
+      });
+
+      // 출력:
+      // 개발팀: 고연봉 직원 있음
+      // 디자인팀: 고연봉 직원 없음
+      // 마케팅팀: 고연봉 직원 있음
+    </script>
+  </body>
+</html>

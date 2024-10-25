@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const person = {
+        name: "John Doe",
+        age: 30,
+        occupation: "Engineer",
+      };
+
+      // 구조 분해 할당을 사용하여 name과 age를 추출하세요.
+      const { name: myName, age: myAge } = person;
+      console.log(myName, myAge);
+
+      const address = {
+        street: "123 Main St",
+        city: "New York",
+        zipCode: "10001",
+        country: {
+          name: "USA",
+          code: "US",
+        },
+      };
+
+      // 구조 분해 할당을 사용하여 city와 zipCode를 추출하세요.
+      const {
+        city,
+        country: { code: myCode },
+      } = address;
+
+      console.log(city, myCode);
+
+      const colors = ["red", "green", "blue", "yellow"];
+
+      // 구조 분해 할당을 사용하여 첫 번째와 세 번째 요소를 추출하세요.
+      const [first, , third] = colors;
+      console.log(first, third);
+
+      const user = {
+        name: "Jane Smith",
+      };
+
+      // 구조 분해 할당을 사용하여 name과 age (기본값 25)를 추출하세요.
+      const { name, age = 25 } = user;
+      console.log(name, age);
+
+      function printBookInfo(book) {
+        const { title, author } = book;
+        console.log(`Title: ${title}, Author: ${author}`);
+        // 구조 분해 할당을 사용하여 title과 author를 추출하고 로그를 출력하세요.
+      }
+
+      const book = {
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        yearPublished: 1925,
+      };
+
+      printBookInfo(book);
+      // 출력 예시: Title: The Great Gatsby, Author: F. Scott Fitzgerald
+    </script>
+  </body>
+</html>

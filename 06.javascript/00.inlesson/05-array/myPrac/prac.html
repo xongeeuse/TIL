@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 가격이 1000 이상인 제품만 포함하는 새 배열을 만드세요.
+      const products = [
+        { id: 1, name: "펜", price: 500 },
+        { id: 2, name: "노트북", price: 1500 },
+        { id: 3, name: "책", price: 800 },
+      ];
+
+      const newArr = [];
+      products.forEach((product) => {
+        if (product.price >= 1000) {
+          newArr.push(product.name);
+        }
+      });
+
+      console.log(newArr);
+
+      // 주어진 문자열 배열에서 각 문자열의 길이를 계산하여 새로운 배열에 저장하세요.
+      const words = ["apple", "banana", "cherry"];
+      // 길이 계산 후 결과: [5, 6, 6]
+
+      const newArr2 = [];
+      words.forEach((word) => {
+        newArr2.push(word.length);
+      });
+
+      console.log(newArr2);
+
+      // 필터링 후 결과: [{ id: 2, name: '노트북', price: 1500 }]
+    </script>
+  </body>
+</html>

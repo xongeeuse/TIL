@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // forEach를 사용하여 다음 작업을 수행하세요:
+      // 1. 짝수는 2배로 증가
+      // 2. 홀수는 3을 더하기
+      // 결과를 새 배열에 저장
+
+      // map으로 바로 배열에 저장하려면
+      const numbers = [1, 2, 3, 4, 5];
+
+      const myFunc = function (number) {
+        if (number % 2 === 0) {
+          return number * 2;
+        } else {
+          return number + 3;
+        }
+      };
+
+      newNumbers = numbers.map(myFunc);
+      console.log(newNumbers);
+
+      // forEach 사용해서 넣으려면
+      const newNumbers2 = [];
+      numbers.forEach((number) => {
+        if (number % 2 === 0) {
+          newNumbers2.push(number * 2);
+        } else {
+          newNumbers2.push(number + 3);
+        }
+      });
+
+      console.log(newNumbers2);
+
+      // numbers.forEach((number) => {
+      //   if (number % 2 === 0) {
+      //     result.push(number * 2);
+      //   } else {
+      //     result.push(number + 3);
+      //   }
+      // });
+
+      // console.log(result);
+      // 결과
+      // [4, 4, 6, 8, 8]
+    </script>
+  </body>
+</html>

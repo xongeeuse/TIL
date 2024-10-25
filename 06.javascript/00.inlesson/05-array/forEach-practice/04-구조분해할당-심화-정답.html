@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const apiResponse = {
+      status: 200,
+      data: {
+        items: [
+          {
+            id: 1,
+            productInfo: {
+              name: '스마트폰',
+              price: 1000000,
+              specs: {
+                color: '블랙',
+                storage: '128GB'
+              }
+            },
+            stock: 50
+          },
+          {
+            id: 2,
+            productInfo: {
+              name: '노트북',
+              price: 1500000,
+              specs: {
+                color: '실버',
+                storage: '512GB'
+              }
+            },
+            stock: 30
+          }
+        ],
+        pagination: {
+          currentPage: 1,
+          totalPages: 5
+        }
+      }
+    }
+
+    // 구조 분해 할당을 사용하여 다음 정보를 추출하세요:
+    // 1. 첫 번째 상품의 이름, 가격, 색상
+    // 2. 페이지네이션 정보
+    // 3. 두 상품의 재고 정보
+
+    // 1. 첫 번째 상품 정보 추출
+    const {
+      data: {
+        items: [{
+          productInfo: {
+            name: firstProductName,
+            price: firstProductPrice,
+            specs: { color: firstProductColor }
+          }
+        }]
+      }
+    } = apiResponse
+
+    // 2. 페이지네이션 정보 추출
+    const {
+      data: {
+        pagination: { currentPage, totalPages }
+      }
+    } = apiResponse
+
+    // 3. 재고 정보 추출
+    const {
+      data: {
+        items: [
+          { stock: stock1 },
+          { stock: stock2 }
+        ]
+      }
+    } = apiResponse
+
+    // 결과 출력
+    // 첫 번째 상품: 스마트폰, 1000000원, 블랙
+    // 페이지: 1/5
+    // 재고 현황: 50, 30
+
+    console.log(`첫 번째 상품: ${firstProductName}, ${firstProductPrice}원, ${firstProductColor}`)
+    console.log(`페이지: ${currentPage}/${totalPages}`)
+    console.log(`재고 현황: ${stock1}, ${stock2}`)
+  </script>
+</body>
+
+</html>

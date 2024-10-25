@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      const library = {
+        books: [
+          { id: 1, title: "자바스크립트 완벽 가이드", status: "available" },
+          { id: 2, title: "파이썬 기초", status: "borrowed" },
+          { id: 3, title: "HTML/CSS 입문", status: "available" },
+        ],
+        borrowHistory: [
+          { bookId: 2, userId: "user1", date: "2024-10-20" },
+          { bookId: 1, userId: "user2", date: "2024-10-15" },
+          { bookId: 1, userId: "user2", date: "2024-10-23" },
+        ],
+      };
+
+      // forEach를 사용하여 다음을 구현하세요:
+      // 1. 현재 대출 가능한 도서 목록
+      const availableBooks = [];
+      library.books.forEach((book) => {
+        if (book.status === "available") {
+          availableBooks.push(book.title);
+        }
+      });
+
+      console.log(availableBooks);
+
+      // 2. 특정 사용자(user2)의 대출 이력
+      const user2History = [];
+      library.borrowHistory.forEach((history) => {
+        if (history.userId === "user2") {
+          const borrowedBook = library.books.find(
+            (book) => history.bookId === book.id
+          );
+          user2History.push({
+            title: borrowedBook.title,
+            date: history.date,
+          });
+        }
+      });
+
+      console.log(user2History);
+
+      // 결과
+      // 대출 가능 도서: [ '자바스크립트 완벽 가이드', 'HTML/CSS 입문' ]
+      // user2 대출 이력: [
+      //   { title: '자바스크립트 완벽 가이드', date: '2024-10-15' },
+      //   { title: '자바스크립트 완벽 가이드', date: '2024-10-23' }
+      // ]
+    </script>
+  </body>
+</html>

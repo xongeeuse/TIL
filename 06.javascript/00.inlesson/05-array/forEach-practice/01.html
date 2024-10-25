@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // forEach를 사용하여 전체 학생의 평균 점수를 계산하세요.
+      const students = [
+        { name: "김철수", score: 85 },
+        { name: "이영희", score: 92 },
+        { name: "박민수", score: 78 },
+        { name: "정지원", score: 90 },
+      ];
+      // 기본 ver.
+      // let sum = 0;
+      // students.forEach((student) => (sum += student.score));
+
+      // const avg = sum / students.length;
+      // console.log(avg);
+
+      // reduce() 메서드 활용 ver.
+      const sum = students.reduce((total, student) => {
+        return (total += student.score);
+      }, 0);
+      console.log(sum);
+
+      const avg = sum / students.length;
+      console.log(avg);
+    </script>
+  </body>
+</html>

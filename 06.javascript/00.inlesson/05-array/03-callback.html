@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 1
+      const numbers1 = [1, 2, 3];
+      numbers1.forEach(function (number) {
+        console.log(number ** 2);
+      });
+
+      // 2
+      const numbers2 = [1, 2, 3];
+      const callBackFunc = function (number) {
+        console.log(number ** 2);
+      };
+      numbers2.forEach(callBackFunc);
+      // numbers2.forEach((number) => console.log(number ** 2));
+    </script>
+  </body>
+</html>
