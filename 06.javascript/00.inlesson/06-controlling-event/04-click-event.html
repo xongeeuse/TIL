@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <button id="btn">버튼</button>
+    <p>클릭횟수 : <span id="counter">0</span></p>
+
+    <script>
+      // 1. 초기값
+      let countNumber = 0;
+
+      // 2. 버튼 요소 선택
+      const btn = document.querySelector("#btn");
+
+      // 3. 이벤트 핸들러의 콜백 함수
+      const clickHandler = function () {
+        // 1. 초기값을 +1 증가
+        countNumber += 1;
+        // 2. 숫자를 콘텐츠로 가지고 있는 span 태그를 선택
+        const spanTag = document.querySelector("#counter");
+        // 3. span 태그의 콘텐츠 값을 countNumber 값으로 변경
+        spanTag.textContent = countNumber;
+      };
+
+      // 4. 선택한 버튼에 이벤트 핸들러 부착
+      btn.addEventListener("click", clickHandler);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <input type="text" class="input-text" />
+    <button id="btn">+</button>
+    <ul></ul>
+
+    <script>
+      const inputTag = document.querySelector(".input-text");
+      const btn = document.querySelector("#btn");
+      const ulTag = document.querySelector("ul");
+
+      // const addTodo = function (event) {
+      //   const liTag = document.createElement("li");
+      //   // 이 부분 주의! event.currentTarget.value 아니고! 이건 클릭 이벤트니까!
+      //   liTag.textContent = inputTag.value;
+      //   ulTag.appendChild(liTag);
+
+      //   inputTag.value = "";
+      // };
+
+      // 공백이면 에러메시지 띄우는 ver.
+      const addTodo = function (event) {
+        const inputData = inputTag.value;
+        if (inputData.trim()) {
+          const liTag = document.createElement("li");
+          liTag.textContent = inputTag.value;
+          ulTag.appendChild(liTag);
+          inputTag.value = "";
+        } else {
+          alert("todo를 입력해주세요.");
+        }
+      };
+
+      btn.addEventListener("click", addTodo);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .blue {
+        color: blue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1></h1>
+    <button id="btn">클릭</button>
+    <input type="text" id="text-input" />
+
+    <script>
+      const btn = document.querySelector("#btn");
+      const inputTag = document.querySelector("#text-input");
+      const h1Tag = document.querySelector("h1");
+
+      const inputHandler = function (event) {
+        h1Tag.textContent = event.currentTarget.value;
+      };
+
+      const clickHandler = function (event) {
+        // h1Tag.classList.add("blue");
+        // toggle 이용해서 on/off 전환 가능
+        h1Tag.classList.toggle("blue");
+      };
+
+      inputTag.addEventListener("input", inputHandler);
+      btn.addEventListener("click", clickHandler);
+    </script>
+  </body>
+</html>

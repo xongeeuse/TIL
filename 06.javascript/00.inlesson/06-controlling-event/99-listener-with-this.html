@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="function">function</button>
+  <button id="arrow">arrow function</button>
+
+  <script>
+    // 일반적인 this 바인딩 규칙
+    // 1. 일반 함수 호출: window
+    // 2. 메서드 호출: 메서드를 소유한 객체
+
+    // addEventListener는 위의 일반적인 규칙과 다르게 동작하는데, 
+    // 이는 JavaScript 엔진이 addEventListener 메서드를 특별하게 처리하기 때문
+    // 내부 구현 참고 (https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
+
+    const functionButton = document.querySelector('#function')
+    const arrowButton = document.querySelector('#arrow')
+
+    // 1. 일반 함수 사용
+    functionButton.addEventListener('click', function () {
+      console.log(this) // <button id="function">function</button>
+    })
+
+    // 2. 화살표 함수 사용
+    arrowButton.addEventListener('click', () => {
+      console.log(this) // window
+    })
+
+    // 3. 화살표 함수에서는 event.currentTarget으로 대체 가능
+    arrowButton.addEventListener('click', (event) => {
+      console.log(event.currentTarget) // <button id="arrow">arrow function</button>
+    })
+  </script>
+</body>
+
+</html>
