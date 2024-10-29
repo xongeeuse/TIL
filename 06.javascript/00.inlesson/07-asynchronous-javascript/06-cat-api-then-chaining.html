@@ -22,10 +22,19 @@
           .then((response) => {
             // console.log(response);
             // console.log(response.data);
-            console.log(response.data[0].url);
+            // console.log(response.data[0].url);
+            // 1. 이미지 주소 저장
             const imgUrl = response.data[0].url;
+            return imgUrl;
+          })
+          // 두번째 then의 콜백함수는 첫번째 콜백함수의 반환값을 인자로 받음
+          // imgUrl === imgData 넘겨주는 데이터가 중요한 것! 이름 잘 맞춰주기!
+          .then((imgData) => {
+            // 2. img 태그 생성
             const imgTag = document.createElement("img");
-            imgTag.setAttribute("src", imgUrl);
+            // 3. img 태그의 src 속성 값 설정
+            imgTag.setAttribute("src", imgData);
+            // 4. body의 자식 태그로 img 태그 추가
             document.body.appendChild(imgTag);
           })
           .catch((error) => {
