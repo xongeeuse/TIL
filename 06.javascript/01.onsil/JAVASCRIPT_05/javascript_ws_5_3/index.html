@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>인기 영화들</h1>
+    <ul></ul>
+
+    <!-- axios CDN을 삽입한다. -->
+    <script>
+      const ul = document.querySelector("ul");
+      // const API_KEY = "5ae5c44b18c13c690a67e2d7986a89f1";
+      // 코드를 입력한다.
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YWU1YzQ0YjE4YzEzYzY5MGE2N2UyZDc5ODZhODlmMSIsIm5iZiI6MTczMDE4MjYzMy42MzAzMzEsInN1YiI6IjY3MjA3Y2U0YjNkNWNiYjg0MmY0YzAzMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GeoPxAa395RrzxypSLiw-uNeWA2PXUjgxpR1CcxOnHk",
+        },
+      };
+
+      fetch(
+        "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1",
+        options
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          // console.log(res.results);
+          const popularMovies = [];
+          for (result of res.results) {
+            if (result.vote_average >= 7) {
+              // console.log(result.title);
+              popularMovies.push(result);
+            }
+          }
+          return popularMovies;
+        })
+        .then((popularMovies) => {
+          for (popularMovie of popularMovies) {
+            const liTag = document.createElement("li");
+            liTag.textContent = popularMovie.title;
+            ul.appendChild(liTag);
+          }
+        })
+        .catch((err) => console.error(err));
+    </script>
+  </body>
+</html>
