@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <ul class="switcher">
+      <li id="grayButton"></li>
+      <li id="whiteButton"></li>
+      <li id="navyButton"></li>
+    </ul>
+
+    <h1>Theme Switcher</h1>
+
+    <p>테마 변경 기능 구현하기</p>
+
+    <script>
+      //    /*
+      // - 각 li 태그가 클릭 되면 body의 background color 와 color 속성이 변경되어야 한다.
+      // 	- css와 HTML 마크업을 직접 수정하지 않는다.
+      //    1. li#grayButton 클릭시 background-color는 gray, color는 white로 변경
+      //    2. li#whiteButton 클릭시 background-color는 white, color는 black으로 변경
+      //    3. li#navyButton 클릭시 background-color는 navy, color는 white로 변경
+      //  */
+      const grayButton = document.querySelector("#grayButton");
+      const whiteButton = document.querySelector("#whiteButton");
+      const navyButton = document.querySelector("#navyButton");
+
+      const clickHandler = function (event) {
+        if (event.target.id === "grayButton") {
+          document.body.style.backgroundColor = "gray";
+          document.body.style.color = "white";
+        } else if (event.target.id === "whiteButton") {
+          document.body.style.backgroundColor = "white";
+          document.body.style.color = "black";
+        } else if (event.target.id === "navyButton") {
+          document.body.style.backgroundColor = "navy";
+          document.body.style.color = "white";
+        }
+      };
+
+      grayButton.addEventListener("click", clickHandler);
+      whiteButton.addEventListener("click", clickHandler);
+      navyButton.addEventListener("click", clickHandler);
+    </script>
+  </body>
+</html>
