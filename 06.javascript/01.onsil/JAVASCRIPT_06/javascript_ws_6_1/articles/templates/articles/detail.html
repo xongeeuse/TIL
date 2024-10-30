@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block content %}
+<h2>DETAIL</h2>
+<h3>{{ article.pk }} 번째 글</h3>
+<hr />
+<p>제목 : {{ article.title }}</p>
+<p>내용 : {{ article.content }}</p>
+<p>작성시각 : {{ article.created_at }}</p>
+<p>수정시각 : {{ article.updated_at }}</p>
+<hr />
+{% if user == article.user %}
+<a href="{% url 'articles:update' article.pk %}">[UPDATE]</a>
+<form id="delete-form" data-article-id="{{ article.pk }}">
+  {% csrf_token %}
+  <input type="submit" value="DELETE" />
+</form>
+{% endif %}
+<a href="{% url 'articles:index' %}">[back]</a>
+<hr />
+<h4>댓글 목록</h4>
+{% if comments %}
+<p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
+{% endif %}
+<ul>
+  {% for comment in comments %}
+  <li>
+    {{ comment.user }} - {{ comment.content }} {% if user == comment.user %}
+    <form
+      action="{% url 'articles:comments_delete' article.pk comment.pk %}"
+      method="POST"
+      class="d-inline"
+    >
+      {% csrf_token %}
+      <input type="submit" value="DELETE" />
+    </form>
+    {% endif %}
+  </li>
+  {% empty %}
+  <p>댓글이 없어요..</p>
+  {% endfor %}
+</ul>
+
+<hr />
+{% if request.user.is_authenticated %}
+<form action="{% url 'articles:comments_create' article.pk %}" method="POST">
+  {% csrf_token %} {{ comment_form }}
+  <input type="submit" />
+</form>
+{% else %}
+<a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+{% endif %}
+
+<script>
+  const deleteForm = document.querySelector("#delete-form");
+  const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+
+  deleteForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const articleId = event.currentTarget.dataset.articleId;
+    // console.log(articleId);
+    if (confirm("정말 삭제하시겠습니까?")) {
+      axios({
+        method: "post",
+        url: `/articles/${articleId}/delete/`,
+        headers: { "X-CSRFToken": csrftoken },
+      })
+        .then((response) => {
+          // console.log(response);
+          console.log("게시글 삭제 완료!");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.log("삭제 안한댕...");
+    }
+  });
+</script>
+
+{% endblock content %}
