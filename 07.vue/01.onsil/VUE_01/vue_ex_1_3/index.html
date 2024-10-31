@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>User Profile</h1>
+      <p>Name: {{ user.name }}</p>
+      <p>Age: {{ user.age }}</p>
+      <button v-on:click="changeName">Change Name</button>
+      <button v-on:click="changeAge">Change Age</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const user = ref({
+            name: "Alice",
+            age: 30,
+          });
+          const changeName = function () {
+            let newName = prompt("Enter new name.", `${user.value.name}`);
+            if (confirm(`${newName}으로 이름 바꿈쓰!`)) {
+              user.value.name = newName;
+            }
+          };
+          const changeAge = function () {
+            let newAge = Number(prompt("Enter new age.", `${user.value.age}`));
+            if (confirm(`${newAge}로 나이 변경쓰!`)) {
+              user.value.age = newAge;
+            }
+          };
+
+          return {
+            user,
+            changeName,
+            changeAge,
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
