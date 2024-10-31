@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 편의상 템플릿에서 ref를 사용할 때는 .value를 작성할 필요 없음 -->
+      <!-- 자동으로 언래핑됩니다. -->
+      <h1>{{ message }}</h1>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      const { createApp, ref } = Vue;
+      const app = createApp({
+        setup() {
+          const message = ref("hello");
+          console.log(message);
+          console.log(message.value);
+          // 템플릿의 참조에 접근하려면 setup함수에서 선언 및 반환 필요
+          return {
+            message,
+          };
+        },
+      });
+      // Mounting the App
+      // HTML 요소에 Vue Application instance를 탑재(연결)
+      // 각 앱 인스턴스에 대해 mount()는 한 번만 호출할 수 있음
+      app.mount("#app");
+    </script>
+  </body>
+</html>
