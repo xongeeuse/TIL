@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- live server extension 을 쓸 때는 절대경로로 하면 인식을 못한다! -->
+  <!-- <link rel="stylesheet" href="C:\Users\multicampus\Desktop\python-pjt\pjt\pjt03\live-code\style.css"> -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- 상대 경로로 작성하면 됩니다. -->
+  <!-- 우리가 정의한 css 파일을 cdn 보다 밑으로 내리자 -->
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
+  <style>
+    /* 미디어 쿼리 */
+    /* CSS 에서 반응형을 구현할 수 있는 기능 */
+
+    /* @: At-rule */
+    /* 구글에 "CSS At-rule MDN" */
+    /* min-width: 최소 범위를 지정 */
+    /* max-width: 최대 범위를 지정 */
+    @media screen and (max-width: 500px) {
+      .intro {
+        background-color: red;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">PJT03</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <!-- href 에 #ID 를 넣어주면 해당 위치로 스크롤이 이동한다.  -->
+            <a class="nav-link" href="#intro">Intro</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- main>section*4 -->
+  <main class="row">
+    <section id="intro" class="intro col-12 col-sm-6 col-md-4 col-lg-3">intro</section>
+    <section id="skills" class="skills col-12 col-sm-6 col-md-4 col-lg-3">skills</section>
+    <section id="projects" class="projects col-12 col-sm-6 col-md-4 col-lg-3">projects</section>
+    <section id="contact" class="contact col-12 col-sm-6 col-md-4 col-lg-3">contact</section>
+  </main>
+
+  <footer>
+    &copy; 2024. PJT03 모두 공유 가능
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>메인 페이지</h1>
+
+{% if request.user.is_authenticated %}
+  <form action="{% url 'crawlings:index' %}" method="POST">
+    {% csrf_token %}
+    <label for="query">검색어: </label>
+    <input type="text" id="query" name="query">
+    <button>검색하기</button>
+  </form>
+
+  {% for result in results %}
+    <p>{{ forloop.counter }}: {{ result.title }}</p>
+    <hr>
+  {% endfor %}
+{% else %}
+  <p>먼저 로그인해주세요.</p>
+{% endif %}
+
+{% endblock content %}

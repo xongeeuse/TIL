@@ -1,0 +1,21 @@
+* {
+  font-family: "Nanum Pen Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 나중에 팀에 따라서 아래와 같이 긴 이름을 쓰는 경우가 있다. */
+/* 언더바 2개로 이어 붙여서(__) 클래스 이름을 구성함 */
+/* .main__section__intro */
+
+.intro,
+.skills,
+.projects,
+.contact {
+  height: 300px;
+}
+
+.skills,
+.contact {
+  background-color: #F0F0F0;
+}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% comment %} login.html 을 렌더링하는 경로: http://127.0.0.1:8000/accounts/login/?next=/boards/create/
+login POST 요청을 보낼 경로: http://127.0.0.1:8000/accounts/login/?next=/boards/create/
+즉, 현재 경로에 그대로 POST 요청을 보내면 된다. {% endcomment %}
+
+{% block content %}
+<h1>로그인</h1>
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-light">Login</button>
+</form>
+{% endblock content %}

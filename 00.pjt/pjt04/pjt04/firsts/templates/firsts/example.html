@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    {% for weather in weathers %}
+      <p>{{ weather.date|date:"Y-m-d" }} / {{ weather.temp_avg_f }} / {{ weather.events }}</p>
+      <hr>
+    {% endfor %}
+</body>
+</html>
