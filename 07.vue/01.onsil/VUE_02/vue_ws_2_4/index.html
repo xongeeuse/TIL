@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .is-selected {
+        background-color: #eee;
+      }
+
+      .is-required {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>다양한 전시 정보</h1>
+      <hr />
+      <ul>
+        <li :class="{'is-selected': isSelected}" :id="enTitle">
+          <label for="selected">전시 선택</label>
+          <input
+            v-model="isSelected"
+            type="checkbox"
+            name="selected"
+            id="selected"
+          />
+          <h3>{{ koTitle }}</h3>
+          <p v-html="description"></p>
+          <hr />
+          <p>{{ artMuseum }}</p>
+          <a :href="museumURL">전시장 바로가기</a>
+          <hr />
+          <p>입장권 구매하기</p>
+          <p>가격: {{ price }}</p>
+          <div>
+            <span :class="{'is-required': totalNum <= 0}"
+              >인원 수 : {{ totalNum }} 명
+            </span>
+            <button @click="decreaseNum">-</button>
+            <button @click="increaseNum">+</button>
+          </div>
+          <hr />
+        </li>
+      </ul>
+      <p>총 입장료 : {{ totalFee }} 원</p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      /*
+      - Vue3 CDN을 사용한다.
+      1. 새로운 app instance를 생성하여 아이디가 app인 container에 mount 하시오.
+      2. 전시 정보를 가지고 있는 객체를 생성한다. 전시 정보 객체가 가진 정보는 아래와 같다.
+        - koTitle : 모네 인사이드
+        - enTitle : monet-inside
+        - artMuseum : 예술의 전당
+        - museumURL : 'https://www.sac.or.kr/'
+        - description : <p> &lt;모네 인사이드&gt; 는 빛의 화가 <b>클로드 모네</b>가 남긴 소중한 명작들을 현대적 감각으로 재해석해 음악과 함께 감상하는 미디어아트 전시입니다. </p>
+        - isSelected : false
+        - price : 1000
+        - totalNum : 0
+      3. 단, 모든 값을 객체에 할당하여도 실습 1-3 단계까지의 모든 기능이 정상 작동할 수 있어야한다.
+    */
+      const { createApp, ref } = Vue;
+      createApp({
+        setup() {
+          const koTitle = ref("모네 인사이드");
+          const enTitle = ref("monet-inside");
+          const artMuseum = ref("예술의 전당");
+          const museumURL = ref("https://www.sac.or.kr/");
+          const description = ref(
+            "<p> <모네 인사이드> 는 빛의 화가 <b>클로드 모네</b>가 남긴 소중한 명작들을 현대적 감각으로 재해석해 음악과 함께 감상하는 미디어아트 전시입니다. </p>"
+          );
+          const isSelected = ref(false);
+          const price = ref(1000);
+          const totalNum = ref(0);
+          const totalFee = ref(0);
+          const decreaseNum = function () {
+            totalNum.value--;
+            totalFee.value = totalNum.value * 1000;
+          };
+          const increaseNum = function () {
+            totalNum.value++;
+            totalFee.value = totalNum.value * 1000;
+          };
+          return {
+            koTitle,
+            enTitle,
+            artMuseum,
+            museumURL,
+            description,
+            isSelected,
+            price,
+            totalNum,
+            decreaseNum,
+            increaseNum,
+            totalFee,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

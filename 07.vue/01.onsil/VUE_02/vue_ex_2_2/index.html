@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>설문조사</h1>
+
+      <form @submit.prevent="submitForm">
+        <div>
+          <label for="name">이름: </label>
+          <input v-model="inputName" id="name" type="text" />
+        </div>
+
+        <div>
+          <label for="email">이메일: </label>
+          <input v-model="inputEmail" id="email" type="email" />
+        </div>
+
+        <div>
+          <label for="age">나이: </label>
+          <input v-model="inputAge" id="age" type="number" />
+        </div>
+
+        <div>
+          <label for="residence">거주지: </label>
+          <select v-model="selectedResidence" id="residence" required>
+            <option value="" disabled selected>거주지를 선택하시오.</option>
+            <option>서울</option>
+            <option>경기</option>
+            <option>충청</option>
+            <option>전라</option>
+            <option>경상</option>
+          </select>
+        </div>
+
+        <div>
+          <label>사용하는 언어: </label>
+          <div>
+            <input
+              type="checkbox"
+              id="python"
+              value="Python"
+              v-model="checkedLanguages"
+            />
+            <label for="python">Python</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="javascript"
+              value="JavaScript"
+              v-model="checkedLanguages"
+            />
+            <label for="javascript">JavaScript</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="csharp"
+              value="C#"
+              v-model="checkedLanguages"
+            />
+            <label for="csharp">C#</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="ruby"
+              value="Ruby"
+              v-model="checkedLanguages"
+            />
+            <label for="ruby">Ruby</label>
+          </div>
+        </div>
+        <input type="submit" value="제출" />
+      </form>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const inputName = ref("");
+          const inputEmail = ref("");
+          const inputAge = ref("");
+          const selectedResidence = ref("");
+          const checkedLanguages = ref([]);
+          const formData = ref({
+            name: inputName,
+            email: inputEmail,
+            age: inputAge,
+            residence: selectedResidence,
+            languages: checkedLanguages,
+          });
+          const submitForm = function () {
+            console.log(formData.value.name);
+            console.log(formData.value.email);
+            console.log(formData.value.age);
+            console.log(formData.value.residence);
+            console.log(formData.value.languages.join(", "));
+          };
+          return {
+            inputName,
+            inputEmail,
+            inputAge,
+            selectedResidence,
+            checkedLanguages,
+            formData,
+            submitForm,
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

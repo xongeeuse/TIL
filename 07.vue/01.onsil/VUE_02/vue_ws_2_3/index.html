@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .is-selected {
+        background-color: #eee;
+      }
+
+      .is-required {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>다양한 전시 정보</h1>
+      <hr />
+      <ul>
+        <li :class="{'is-selected': selected}" id="영어 제목">
+          <label for="selected">전시 선택</label>
+          <input
+            @click="isSelected"
+            v-model="selected"
+            type="checkbox"
+            name="selected"
+            id="selected"
+          />
+          <h3>한글 제목</h3>
+          <p>전시 정보 설명</p>
+          <hr />
+          <p>전시 위치</p>
+          <a href="전시장 링크">전시장 바로가기</a>
+          <hr />
+          <p>입장권 구매하기</p>
+          <div>
+            <span :class="{'is-required': count<=0}"
+              >인원 수 : {{ count }} 명
+            </span>
+            <button @click="decreaseNum">-</button>
+            <button @click="increaseNum">+</button>
+          </div>
+          <p>총 입장료 : {{ totalFee }} 원</p>
+          <hr />
+        </li>
+      </ul>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      /*
+      - Vue3 CDN을 사용한다.
+      1. 새로운 app instance를 생성하여 아이디가 app인 container에 mount 하시오.
+      2. 전시 선택 여부를 가지는 변수를 생성한다.
+      3. '전시 선택' checkbox의 선택 여부에 따라 값이 변할 수 있도록 양방향 바인딩 directive를 사용한다.
+      4. 전시가 선택되었다면, is-selected class가 해당 전시 li태그에 부여될 수 있도록 코드를 작성한다.
+        - 선택되지 않은 상태일 때는 class가 부여되지 않아야 한다.
+      5. 인원 수를 체크하는 변수를 생성한다. (이전 실습에서 작성하였다면 해당 변수를 활용한다.)
+      6. 인원 수가 0 이하 일때는 is-required class를 인원수 태그에 부여될 수 있도록 코드를 작성한다.
+        - 인원수가 1 이상일 때는 class가 부여되지 않아야 한다.
+    */
+      const { createApp, ref } = Vue;
+      createApp({
+        setup() {
+          const selected = ref(false);
+          const isSelected = function () {
+            selected.value = !selected.value;
+            // console.log(selected.value);
+          };
+          const count = ref(0);
+          const totalFee = ref(0);
+          const decreaseNum = function () {
+            count.value--;
+            totalFee.value = count.value * 1000;
+          };
+          const increaseNum = function () {
+            count.value++;
+            totalFee.value = count.value * 1000;
+          };
+
+          return {
+            selected,
+            isSelected,
+            count,
+            totalFee,
+            decreaseNum,
+            increaseNum,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
