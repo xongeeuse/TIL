@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 
+      "올바른 key 사용법"
+
+      1. 권장되는 key 값
+      - 데이터베이스의 고유 ID
+      - 항목의 고유한 식별자
+      - 변경되지 않는 속성 값
+
+      2. 피해야 할 사항
+      - 배열의 인덱스를 key로 사용하는 것
+      - 객체를 key로 사용하는 것
+    -->
+
+    <!-- Maintaining State with key -->
+    <!-- key 속성은 Vue의 내부 Virtual DOM 알고리즘이 노드를 식별하는 데 필수적인 힌트를 제공 -->
+    <!-- 에러가 발생하지 않더라도 key 속성을 사용하는 것이 Vue 애플리케이션의 안정성과 성능을 위해 매우 중요 -->
+    <div v-for="item in items" :key="item.id">
+      {{ item.name }}
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref, computed } = Vue
+
+    const app = createApp({
+      setup() {
+        let id = 0
+
+        const items = ref([
+          { id: id++, name: 'Alice' },
+          { id: id++, name: 'Bella' }
+        ])
+
+        return { items }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

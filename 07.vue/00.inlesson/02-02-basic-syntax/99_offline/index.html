@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- computed와 watch, method의 차이를 배운 날 이후부터... -->
+      <!-- 쓸데없는 계산을 죄다 computed에다가 때려박는다. -->
+    <h1>현재 작성된 할일 목록의 수 : {{ todos.length }}</h1>
+    <!-- 단순 JS 객체의 속성이나, 메서드로 해결이 안되는 연산이 필요할떄 -->
+    <!-- 만약, 완료된 todo의 개수가 궁금하다. -->
+    <!-- 코드의 가독성이 너무 떨어진다. -->
+    <h2>완료된 todo 목록의 수 : {{ todos.filter(todo => todo.completed).length }}</h2>
+    <!-- computed를 몰랐던 우리 -->
+    <!-- 이 메서드는 언제 호출 되느냐 -> vue가 화면을 재 렌더링 해야할때마다 호출 -->
+    <!-- 재 렌더링 되야 하는 상환은 언제냐 -> 반응형 객체의 데이터가 바뀌었을때 호출 -->
+    <!-- 완료된 todo의 개수를 세어서 반환해주는 메서드를 호출 -->
+    <!-- <h2>완료된 todo 목록의 수 : {{ compledtedTodosCount() }}</h2> -->
+    <!-- 똑같은 데이터를 다른곳에서 또 쓸수도 있어서 호출. -->
+    <!-- <h2>완료된 todo 목록의 수 : {{ compledtedTodosCount() }}</h2> -->
+    <!-- 똑같은 데이터를 다른곳에서 또 쓸수도 있어서 호출. -->
+    <!-- <h2>완료된 todo 목록의 수 : {{ compledtedTodosCount() }}</h2> -->
+    
+    <!-- computed로 만든 값을 보여주기 -->
+    <!-- <h2>완료된 todo 목록의 수 : {{ computedTodosCount }}</h2> -->
+    <!-- 똑같은 데이터를 다른곳에서 또 쓸수도 있어서 렌더링. -->
+    <!-- <h2>완료된 todo 목록의 수 : {{ computedTodosCount }}</h2> -->
+    <!-- 똑같은 데이터를 다른곳에서 또 쓸수도 있어서 렌더링. -->
+    <h2>완료된 todo 목록의 수 : {{ computedTodosCount }}</h2>
+
+
+    <!-- 시멘틱 태그를 사용해서 영역을 구분짓자. -->
+    <!-- card도 있지만, login 화면도 있어야한다. -->
+    <!-- 가장 큰 2개의 영역을 우선 구분짓고 작업을한다. -->
+    <!-- python 부정형 -> not -->
+    <!-- JavaScrip 부정형 -> ! -->
+    <article 
+      id="todo-list"
+      v-if="isLogin"
+    >
+      <!-- 요소 반복 : 실습떄는 보통 ul 태그를 쓰고잇다. -->
+      <!-- v-for는 항상 key값을 넣어줘야 한다. -->
+      <!-- key라는 값은 HTML이 원래 가지고있는 속성이 안디ㅏ. vue에서 제공하는 속성이다. -->
+      <!-- card class는 이 영역은 항상 보유하고 있어야 한다. -->
+      <!-- 그러나, 각 todo 마다의 completed 정보에 따라서 달라져야하는 속성이 있을 수도 있다. -->
+      <!-- 근데 v-for랑 v-if 같이 못쓰는데...? -->
+      <!-- class 속성이랑 :class랑 같이 쓸 수 있다. -->
+      <!-- 
+        이 카드가 사용자에게 click 되었을떄, 함수를 실행한다. 
+        그 함수는, vue에서 정의해둔 todo 영역에, 현재 선택된 todo를 넘긴다.
+      -->
+      <div 
+        class="card"
+        v-for="todo in todos"
+        :key="todo.id"
+        :class="{done: todo.completed}"
+        @click="goDetail(todo)"
+      >
+        <p>{{ todo.title }}</p>
+        <p>{{ todo.completed }}</p>
+       </div>
+    </article>
+    <!-- 모달 영역을 만든다. -->
+    <!-- 디테일 모달은 항상 보이는게 아니라, 특정 조건을 만족할때만 보여야한다. -->
+    <!-- v-if는 조건을 만족하지 못하면 렌더링 자체를 하지 않음. -->
+    <!-- 즉, 렌더링 단계에서부터 결정되는 과정이기 때문에 우선순위가 제일 높다. -->
+    <!-- 
+      사용자에게 보이지 않더라도 기능을 하는 element들이 있다. 
+      -> django csrf_token -> type=hidden
+    -->
+    <!-- 
+      v-if와 v-show는 큰 차이가 있다. 
+      v-if는 언제? -> 상대적으로 전환될 가능성이 낮지만, 필요로 하는 데이터가 많을때
+      v-show는 언제? -> v-if의 반대상황
+    -->
+    <section
+      v-show="todo"
+      class="detail"
+    >
+      <!-- 모달을 켰다 껐다가 아니라, 그냥 렌더링 했다 안했다. -->
+      <!-- 일반적으로는 함수를 호출하고, 그 함수에 의해서 작업을 하지만... -->
+      <!-- 지금처럼 간단하게 todo의 값만 false로 바꾸면 된다면? -->
+      <!-- <button @click="closeModal">X</button> -->
+      <button @click="todo=false">X</button>
+      <h1>{{ todo.id }} | {{ todo.title }}</h1>
+      <p>{{ todo.completed }}</p>
+
+      <!-- modal 안에서 comments 정보 보여주기 -->
+      <ul>
+        <li 
+          v-for="comment in detailComputedComments"
+          :key="comment.id"
+        >
+          <p>{{ comment.id }} | {{ comment.body }}</p>
+        </li>
+      </ul>
+    </section>
+
+    <article
+      id="login-form"
+      v-if="!isLogin"
+    >
+      <!-- form 태그의 기본 동작은 취소 -->
+      <form @submit.prevent="login">
+        <!-- label의 textContent도 중요하지만.. for, id가 더 중요하다 -->
+        <!-- 사용자 입력 정보를 v-model을 사용해서 양방향 바인딩 -->
+        <label for="username">username: </label>
+        <input type="text" id="username"  v-model="username">
+        <label for="password">password: </label>
+        <input type="password" id="password"  v-model="password">
+        <input type="submit" value="LOGIN">
+      </form>
+    </article>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const { createApp, ref, onMounted, computed, watch } = Vue
+    const app = createApp({
+      setup() {
+        // detail용 todo
+        // 초기값을 없음으로 하고 싶다면 null이어도 되는것 아니냐?
+        const todo = ref(false)
+        // todo 목록 더미데이터
+        const todos = ref([
+          {
+            id: 1,
+            title: 'first title',
+            completed: false
+          },
+          {
+            id: 2,
+            title: 'second title',
+            completed: true
+          },
+        ])
+        
+        const goDetail = function (item) {
+          // for문에 있던 card 중, 하나가 click되면 실행 됨.
+          // 호출할때, todo 정보를 인자로 넘겼음
+          // 넘겨받은 인자를 매개변수 item에 담았음.
+          // vue에 정의된 data todo의 value에 넘겨받은 item을 할당함.
+          todo.value = item
+        }
+        
+        const comments = ref([])
+        // computed로 계산되어서 얻은 배열을 순회해서
+        // 댓글 목록을 화면에 렌더링
+        const detailComputedComments = computed(() => {
+          return comments.value.filter(comment => comment.postId === todo.value.id)
+        })
+
+        // const detailWahtchComments = ref([])
+        // // 첫번째 인자-> 감시 대상
+        // // 2번째 인자 -> callBack Function (감시대상의 새로운값, 감시대상의 변경전 값)
+        // watch(todo, (newVal, oldVal) => {
+        //   console.log(newVal)
+        //   console.log(oldVal, 'it`s old')
+        //   // computed는 하나의 값을 계산해서 반환
+        //   // watch는 더 복잡한 어떠한 행위를 진행 -> 함수 실행
+        //   // 주의사항 당연하게도, watch안에서 감시대상을 수정하면 안된다.
+        //   detailWahtchComments.value = comments.value.filter(comment => {
+        //     return comment.postId === todo.value.id
+        //   })
+        // })
+
+        // LCH 호출
+        // JS 함수는 호출방식에 따라서, this가 달라진다.
+        // 물론 (우리는 vue에서 this를 쓸 일이 거의 없다.)
+        // 하지만, vue의 동작을 생각해서, callBack function은 arrow function
+        onMounted(() => {
+          axios({
+            method: 'get',
+            url: 'https://jsonplaceholder.typicode.com/todos'
+          })
+            .then(res => {
+              // console.log(res)
+              // 파이썬 슬라이싱 -> [start:end:step]
+              // js 슬라이싱 -> Array.slice(start, end)
+              todos.value = res.data.slice(0, 10)
+            })
+            .catch(err => console.log(err))
+
+          axios({
+            method: 'get',
+            url: 'https://jsonplaceholder.typicode.com/comments'
+          })
+            .then(res => {
+              comments.value = res.data
+            })
+            .catch(err => console.log(err))
+        })
+
+        const compledtedTodosCount = function () {
+          // filter Array Helper Method의 역할은
+          // return문에 작성된 값의 평가 결과가 true인 `요소` 들을 모아서
+          // 새로운 배열을 반환 -> result 변수에 할당
+          const result = todos.value.filter(function (todo) {
+            return todo.completed === true
+          })
+          // 이 함수가 호출되는 횟수를 체크하기 위해서
+          console.log('method is called!!!')
+          // compledtedTodosCount 함수가 할 일 -> filter로 걸러진 배열의 길이를 반환.
+          return result.length
+        }
+        // 변수를 만든다. -> 완료된 todo의 수를 가지고 있는 변수
+        // 여기에 무슨 값을 할당 할거냐? -> computed 함수의 반환값을 할당.
+        const computedTodosCount = computed(() => {
+          // computed가 호출된 횟수를 보기 위해서 출력
+          console.log('computed is called!!!')
+          // 어떤 값 하나를 반환하는 함수
+          // todos 배열이 가진 filter 메서드로, 각각의 todo가 가진 completed가 
+          // true 인 경우들만 모아서 새로운 배열을 만들고. 그 배열의 길이를 반환
+          return todos.value.filter(todo => todo.completed).length
+        })
+
+        const isLogin = ref(false)
+        const username = ref('')
+        const password = ref('')
+        const login = function () {
+          // username이 공백이 아니고, password가 공백이 아닐때만 허용
+          // 사용자가 input에 입력한 값을 알 수 있어야함.
+          // 양 방향 바인딩
+          // JS 문자열의 메서드 trim
+          if (username.value.trim() && password.value.trim()) {
+            // username을 적긴 적었는데, 12글자를 초과해버렸다
+            // 그 상태로 login 요청을 보냈다.
+            if (username.value.length > 12 ) {
+              // 경고 문구를 띄운다.
+              alert('username은 12글자 이하로 작성해 주세요.')
+              return
+            }
+          
+            isLogin.value = true
+            return
+          } else {
+            alert('아이디와 비밀번호를 입력해 주세요.')
+
+          }
+        }
+        return {
+          todos, todo, computedTodosCount, comments, detailComputedComments, 
+          goDetail, compledtedTodosCount,
+          // accounts
+          isLogin, username, password,
+          login
+        }
+      }
+    })
+    app.mount('#app')
+  </script>
+</body>
+</html>

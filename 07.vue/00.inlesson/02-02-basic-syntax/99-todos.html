@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- v-model, v-on, v-bind, v-for를 활용한 todo 애플리케이션 구현 -->
+  <div id="app">
+    <form @submit.prevent="addTodo">
+      <input v-model="newTodo">
+      <button>Add Todo</button>
+    </form>
+    <ul>
+      <li v-for="todo in todos" :key="todo.id">
+        {{ todo.text }}
+        <button @click="removeTodo(todo)">X</button>
+      </li>
+    </ul>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        let id = 0
+
+        const newTodo = ref(null)
+        const todos = ref([
+          { id: id++, text: 'Learn HTML' },
+          { id: id++, text: 'Learn JS' },
+          { id: id++, text: 'Learn Vue' }
+        ])
+
+        // 새로운 Todo 항목을 추가하는 함수
+        const addTodo = function () {
+          // todos 배열에 새로운 Todo 객체 추가
+          todos.value.push({ id: id++, text: newTodo.value })
+          // 입력 필드 초기화
+          newTodo.value = null
+        }
+
+        // 선택한 Todo 항목을 삭제하는 함수
+        const removeTodo = function (selectedTodo) {
+          // filter를 사용하여 선택한 Todo를 제외한 새로운 배열 생성
+          todos.value = todos.value.filter((todo) => todo !== selectedTodo)
+        }
+
+        return {
+          newTodo,
+          todos,
+          addTodo,
+          removeTodo
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>현재 작성된 할 일 목록의 수: {{ todos.length }}</h1>
+      <h2>
+        <!-- 완료된 todo 목록의 수: {{ todos.filter(todo => todo.completed).length }} -->
+        <!-- 완료된 todo 목록의 수: {{ completedTodosCount() }} -->
+      </h2>
+      <!-- <h2>완료된 todo 목록의 수: {{ completedTodosCount() }}</h2> -->
+      <!-- <h2>완료된 todo 목록의 수: {{ computedTodosCount }}</h2> -->
+      <h2>완료된 todo 목록의 수: {{ computedTodosCount }}</h2>
+      <article v-show="isLogin" id="todo-list">
+        <!-- v-for는 항상 key값을 넣어줘야 한다! -->
+        <!-- key라는 값은 HTML이 원래 가지고 있는 속성이 아님! vue에서 제공하는 속성! -->
+        <template v-for="todo in todos" :key="todo.id">
+          <div
+            @click="goDetail(todo)"
+            class="card"
+            :class="{done: todo.completed}"
+          >
+            <p>{{ todo.title }}</p>
+            <!-- <p>{{ todo.completed }}</p> -->
+            <input v-model="todo.completed" type="checkbox" /> completed
+            <!-- <p>{{ todo.completed }}</p> -->
+          </div>
+        </template>
+        <!-- 모달 영역 -->
+        <!-- 디테일 모달은 항상 보이는 게 아니라, 특정 조건을 만족할 때만 보여야 한다. -->
+        <!-- v-if는 조건을 만족하지 못하면 렌더링 자체를 하지 않음 -->
+        <!-- 즉, 렌더링 단계에서부터 결정되는 과정이기 때문에 우선순위가 가장 높다. -->
+        <!-- 사용자에게 보이지 않더라도, 기능을 하는 element들이 있다. -->
+        <!-- 
+          v-if와 v-show에는 큰 차이가 있다.
+          v-if 는 상대적으로 전환될 가능성이 낮지만, 필요로 하는 데이터가 많을 때
+          v-show는 v-if의 반대 상황
+          -->
+        <section v-show="todo" class="detail">
+          <button @click="todo=false">X</button>
+          <h1>{{ todo.id }} | {{ todo.title }}</h1>
+          <p>{{ todo.completed }}</p>
+
+          <ul>
+            <li v-for="comment in comments" :key="comment.id">
+              <p>{{ comment.id }} | {{ comment.body }}</p>
+            </li>
+          </ul>
+        </section>
+      </article>
+      <article id="login-form" v-if="!isLogin">
+        <form @submit.prevent="login" action="">
+          {{ username }} | {{ password }}
+          <label for="username">username: </label>
+          <input type="text" id="username" v-model="username" />
+          <label for="password">password: </label>
+          <input type="password" id="password" v-model="password" />
+          <input type="submit" value="LOGIN" />
+        </form>
+      </article>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref, onMounted, computed, watch } = Vue;
+      const app = createApp({
+        setup() {
+          const todo = ref(false);
+          const todos = ref([
+            {
+              id: 1,
+              title: "first title",
+              completed: false,
+            },
+            {
+              id: 2,
+              title: "second title",
+              completed: true,
+            },
+          ]);
+          const goDetail = function (item) {
+            todo.value = item;
+          };
+
+          const comments = ref([]);
+          const detailComputedComments = computed(() => {
+            return comments.value.filter(
+              (comment) => comment.postId === todo.value.id
+            );
+          });
+
+          // const detailWatchComments = ref([]);
+          watch(todo, (newVal, oldVal) => {
+            console.log(newVal);
+            console.log(oldVal, "It's old");
+          });
+
+          onMounted(() => {
+            axios({
+              method: "get",
+              url: "https://jsonplaceholder.typicode.com/todos",
+            })
+              .then((res) => {
+                // console.log(res);
+                todos.value = res.data.slice(0, 10);
+              })
+              .catch((err) => console.log(err));
+
+            axios({
+              method: "get",
+              url: "https://jsonplaceholder.typicode.com/comments",
+            })
+              .then((res) => {
+                comments.value = res.data;
+              })
+              .catch((err) => console.log(err));
+          });
+          const completedTodosCount = function () {
+            const result = todos.value.filter(function (todo) {
+              return todo.completed === true;
+            });
+            console.log("method is called!");
+            return result.length;
+          };
+          const computedTodosCount = computed(() => {
+            console.log("computed is called!");
+            return todos.value.filter((todo) => todo.completed).length;
+          });
+          const isLogin = ref(false);
+          const username = ref("");
+          const password = ref("");
+          const login = function () {
+            if (username.value.trim() && password.value.trim()) {
+              if (username.value.length > 12) {
+                alert("username은 12글자 이하로 작성해주세요.");
+                return;
+              }
+              isLogin.value = true;
+              return;
+            } else {
+              alert("아이디와 비밀번호를 입력해주세요.");
+            }
+          };
+          return {
+            todo,
+            todos,
+            comments,
+            goDetail,
+            completedTodosCount,
+            computedTodosCount,
+            detailComputedComments,
+            isLogin,
+            login,
+            username,
+            password,
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
