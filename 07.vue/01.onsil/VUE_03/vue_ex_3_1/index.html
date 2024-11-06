@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .is-completed {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>Todo Application</h1>
+
+      <ul>
+        <template v-for="todo in todos" :key="todo.id">
+          <li :class="{'is-completed':todo.isCompleted}">
+            <input type="checkbox" v-model="todo.isCompleted" />{{ todo.text }}
+          </li>
+        </template>
+      </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          let id = 0;
+          const todos = ref([
+            { id: id++, text: "SQLD 공부", isCompleted: false },
+            { id: id++, text: "프로젝트 구상", isCompleted: false },
+            { id: id++, text: "잘놀잘먹", isCompleted: false },
+          ]);
+          return {
+            todos,
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
