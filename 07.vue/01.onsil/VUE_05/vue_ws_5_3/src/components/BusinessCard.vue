@@ -6,7 +6,7 @@
         v-for="card in businessCards"
         :key="card.name"
         :card="card"
-        @delete-card-event="deleteCard"
+        @delete-card-event="deleteCard(card)"
       />
     </div>
   </div>
@@ -24,13 +24,20 @@ const businessCards = ref([
   { name: "세르게이 브린", title: "구글 공동창업주" },
 ]);
 
-const deleteCard = function (businesscard) {
-  const idx = businessCards.value.findIndex(
-    (c) => c.name === businesscard.name
+const deleteCard = function (item) {
+  // 1. idx 찾아서 splice 하는 방법
+  // const idx = item.value.findIndex(
+  //   (c) => c.name === item.name
+  // );
+  // if (idx !== -1) {
+  //   businessCards.value.splice(idx, 1);
+  // }
+
+  // 2. filter로 객체 비교해서 새로운 배열 생성
+  // 이게 더 간단하네!
+  businessCards.value = businessCards.value.filter(
+    (businesscard) => businesscard != item
   );
-  if (idx !== -1) {
-    businessCards.value.splice(idx, 1);
-  }
 };
 </script>
 

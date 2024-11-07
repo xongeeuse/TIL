@@ -2,7 +2,7 @@
   <div class="card">
     <h4>이름: {{ card.name }}</h4>
     <p>직함: {{ card.title }}</p>
-    <button @click="deleteCardFunc(card)">명함 삭제</button>
+    <button @click="deleteCardFunc">명함 삭제</button>
 
     <!-- props 변수에 할당했을 경우 -->
     <!-- <button @click="deleteCardFunc">명함 삭제</button> -->
@@ -24,8 +24,8 @@ defineProps({
 });
 
 const emit = defineEmits(["delete-card-event"]);
-const deleteCardFunc = function (card) {
-  emit("delete-card-event", card);
+const deleteCardFunc = function () {
+  emit("delete-card-event");
 };
 </script>
 
