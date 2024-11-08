@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UP-DOWN-GAME</title>
+  </head>
+  <body>
+    <h1>{{ game_session_id }}번째 업다운 게임</h1>
+    <p>1 ~ 100 사이의 숫자를 입력해주세요.</p>
+
+    <form id="guessForm">
+      {% csrf_token %}
+      <label for="">Your Guess:</label>
+      <input type="number" id="userGuess" required />
+      <button>정답인가요?</button>
+    </form>
+
+    <p>정답 : {{ target_number }}</p>
+    <p id="resultMessage"></p>
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"
+    integrity="sha512-DdX/YwF5e41Ok+AI81HI8f5/5UsoxCVT9GKYZRIzpLxb8Twz4ZwPPX+jQMwMhNQ9b5+zDEefc+dcvQoPWGNZ3g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script>
+      const guessForm = document.querySelector('#guessForm')
+      const resultMessage = document.querySelector('#resultMessage')
+      const sessionId = {{ game_session_id }}
+      const csrfToken = document.querySelector('[name="csrfmiddlewaretoken"]').value;
+
+      guessForm.addEventListener('submit', function(event) {
+          event.preventDefault();
+          const userGuessElement = document.querySelector('#userGuess')
+          const userGuess = userGuessElement.value
+          const data = {
+              'user_guess': userGuess,
+          }
+
+          axios.post(`/games/make-guess/${sessionId}/`, data, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': csrfToken
+        }
+      })
+      .then(response => {
+        resultMessage.innerHTML = response.data.message
+      })
+      .catch(error => {
+        console.log('error = ', error)
+      });
+    });
+  </script>
+</html>
