@@ -4,49 +4,52 @@
     <form @submit.prevent="createArticle">
       <div>
         <label for="title">제목 : </label>
-        <input type="text" id="title" v-model.trim="title">
+        <input type="text" id="title" v-model.trim="title" />
       </div>
       <div>
         <label for="content">내용 : </label>
         <textarea id="content" v-model.trim="content"></textarea>
       </div>
-      <input type="submit">
+      <input type="submit" />
     </form>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useCounterStore } from '@/stores/counter'
-import axios from 'axios'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import { useCounterStore } from "@/stores/counter";
+import axios from "axios";
+import { useRouter } from "vue-router";
 
-const title = ref(null)
-const content = ref(null)
-const store = useCounterStore()
-const router = useRouter()
+const title = ref(null);
+const content = ref(null);
+const store = useCounterStore();
+const router = useRouter();
 
+store.token = 3
 // DRF로 게시글 생성 요청을 보내는 함수
 const createArticle = function () {
   axios({
-    method: 'post',
+    method: "post",
     url: `${store.API_URL}/api/v1/articles/`,
+    headers: {
+      // 왜 value 안 붙여?ㅠ
+      // Authorization: `Token ${store.token.value}`,
+      Authorization: `Token ${store.token}`,
+    },
     data: {
       title: title.value,
-      content: content.value
-    }
+      content: content.value,
+    },
   })
     .then((res) => {
       // console.log('게시글 작성 성공!')
-      router.push({ name: 'ArticleView' })
+      router.push({ name: "ArticleView" });
     })
     .catch((err) => {
-      console.log(err)
-    })
-}
-
+      console.log(err);
+    });
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
