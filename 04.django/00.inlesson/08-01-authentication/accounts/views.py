@@ -15,7 +15,7 @@ def login(request):
             # auth_login(request, 인증된 유저 객체)
             user = form.get_user()
             auth_login(request, user)
-            return redirect('articles:index')
+            return redirect('todos:index')
     else:
         form = AuthenticationForm()
     context = {
