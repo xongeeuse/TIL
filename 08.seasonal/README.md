@@ -36,11 +36,11 @@ ex) https://lab.ssafy.com/{교육생NameSpece}/seasonal_fesw/-/tree/master/과�
 | 3. 개발 | 웹 | :white_check_mark: | Websocket 통신 실습 |
 | 3. 개발 | 캐싱 | :white_large_square: | 캐싱의 기본 개념 이해 및 적용 |
 | 3. 개발 | 테스트 | :white_check_mark: | API 테스트 실습 |
-| 4. 테스트 | SW공학 | :white_large_square: | 1학기 관통PJT 서비스에 대한 SW 테스트 케이스 제작 |
+| 4. 테스트 | SW공학 | :white_check_mark: | 1학기 관통PJT 서비스에 대한 SW 테스트 케이스 제작 |
 | 4. 테스트 | 테스트 | :white_large_square: | 1학기 관통 PJT 결과에 대한 성능 테스트 수행 |
 | 5. 배포 | CI/CD | :white_large_square: | AWS EC2 배포 실습 |
 | 6. 유지보수 | DB | :white_large_square: | MariaDB 백업+복구 입문 |
-| 6. 유지보수 | 유지보수 | :white_large_square: | 소프트웨어 유지보수 |
+| 6. 유지보수 | 유지보수 | :white_check_mark: | 소프트웨어 유지보수 |
 | 6. 유지보수 | 유지보수 | :white_large_square: | 유지보수를 위한 로깅(Logging) |
 | 6. 유지보수 | DB | :white_large_square: | 데이터베이스 형상 관리 |
 | 7. 기타 | PMS | :white_large_square: | JIRA의 활용 |
@@ -49,3 +49,90 @@ ex) https://lab.ssafy.com/{교육생NameSpece}/seasonal_fesw/-/tree/master/과�
 | 7. 기타 | 보안 | :white_large_square: | 네트워크 보안 with Wireshark |
 | 7. 기타 | 분석 | :white_large_square: | Fiddler 사용해보기 |
 | 7. 기타 | 웹 | :white_large_square: | CSR vs SSR |
+
+
+## PRJ#21 소프트웨어 유지보수
+### 리팩토링 전/후 소스
+1. URL 처리 로직 개선
+- Before
+  ```javascript
+    async fetchNextPage() {
+      if (!this.pagination.next) return;
+      const nextPageUrl = new URL(this.pagination.next);
+      const page = nextPageUrl.searchParams.get("page");
+      await this.getSavings({ page });
+    }
+
+    async fetchPreviousPage() {
+      if (!this.pagination.previous) return;
+      const previousPageUrl = new URL(this.pagination.previous);
+      const page = previousPageUrl.searchParams.get("page");
+      await this.getSavings({ page });
+    }
+  ```
+- After
+    ```javascript
+      async fetchPage(paginationUrl, direction) {
+        if (!paginationUrl) return;
+        const url = new URL(paginationUrl);
+        const page = url.searchParams.get("page");
+        await this.getSavings({ page });
+      }
+
+      async fetchNextPage() {
+        await this.fetchPage(this.pagination.next, 'next');
+      }
+
+      async fetchPreviousPage() {
+        await this.fetchPage(this.pagination.previous, 'previous');
+      }
+    ```
+2. 응답 처리 로직 분리
+- Before
+  ```javascript
+    const response = await api.get(`${this.API_URL}/search/`, {
+      params: searchParams,
+    });
+
+    this.products = response.data.results;
+    this.pagination = {
+      next: response.data.next,
+      previous: response.data.previous,
+      count: response.data.count,
+    };
+  ```
+- After
+  ```javascript
+    handleSavingsResponse(response) {
+      const { results, next, previous, count } = response.data;
+      this.products = results;
+      this.pagination = { next, previous, count };
+      this.currentSearchParams = searchParams;
+    }
+
+  ```
+
+3. API 경로 상수화
+- Before
+  ```javascript
+    state: () => ({
+      API_URL: "/savings",
+      // ...
+    })
+  ```
+- After
+  ```javascript
+    const API_ENDPOINTS = {
+      SAVINGS: '/savings',
+      SEARCH: '/search',
+      LIKES: '/likes',
+      RECOMMEND: '/recommend',
+      LIKED_SAVINGS: '/liked-savings'
+    };
+
+    state: () => ({
+      endpoints: API_ENDPOINTS,
+      // ...
+    })
+
+  ```
