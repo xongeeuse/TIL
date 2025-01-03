@@ -38,7 +38,7 @@ ex) https://lab.ssafy.com/{교육생NameSpece}/seasonal_fesw/-/tree/master/과�
 | 3. 개발 | 테스트 | :white_check_mark: | API 테스트 실습 |
 | 4. 테스트 | SW공학 | :white_check_mark: | 1학기 관통PJT 서비스에 대한 SW 테스트 케이스 제작 |
 | 4. 테스트 | 테스트 | :white_large_square: | 1학기 관통 PJT 결과에 대한 성능 테스트 수행 |
-| 5. 배포 | CI/CD | :white_large_square: | AWS EC2 배포 실습 |
+| 5. 배포 | CI/CD | :white_check_mark: | AWS EC2 배포 실습 |
 | 6. 유지보수 | DB | :white_large_square: | MariaDB 백업+복구 입문 |
 | 6. 유지보수 | 유지보수 | :white_check_mark: | 소프트웨어 유지보수 |
 | 6. 유지보수 | 유지보수 | :white_large_square: | 유지보수를 위한 로깅(Logging) |
@@ -47,8 +47,8 @@ ex) https://lab.ssafy.com/{교육생NameSpece}/seasonal_fesw/-/tree/master/과�
 | 7. 기타 | 보안 | :white_large_square: | MySQL 내장함수를 이용한 Data 암호화 |
 | 7. 기타 | 보안 | :white_large_square: | NoSQL DB 데이터 암호화 입문 |
 | 7. 기타 | 보안 | :white_large_square: | 네트워크 보안 with Wireshark |
-| 7. 기타 | 분석 | :white_large_square: | Fiddler 사용해보기 |
-| 7. 기타 | 웹 | :white_large_square: | CSR vs SSR |
+| 7. 기타 | 분석 | :white_check_mark: | Fiddler 사용해보기 |
+| 7. 기타 | 웹 | :white_check_mark: | CSR vs SSR |
 
 
 ## PRJ#21 소프트웨어 유지보수
