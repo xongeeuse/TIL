@@ -52,7 +52,7 @@ ex) https://lab.ssafy.com/{교육생NameSpece}/seasonal_fesw/-/tree/master/과�
 
 
 ## PRJ#21 소프트웨어 유지보수
-### 리팩토링 전/후 소스
+### 리팩토링 전/후 소스 비교
 1. URL 처리 로직 개선
 - Before
   ```javascript
