@@ -4,6 +4,7 @@ fun main() {
 //    checkNum(9)
 //    forAndWhile()
     nullcheck()
+    ignoreNulls("str")
 }
 
 //4. 조건식
@@ -107,9 +108,12 @@ fun nullcheck() {
     var nullName : String? = null
     // ? 붙여주면 nullable type이 됨 => type 생략하면 안되겠죠?
 
-    var nameInUpperCase = name.toUpperCase()
+    // 코틀린 1.5 버전부터 toUpperCase() 메소드가 deprecated(더 이상 사용하지 않음)
+    // 대신 uppercase() 사용
+    var nameInUpperCase = name.uppercase()
+//    println(nameInUpperCase)
 
-    var nullNameInUpperCase = nullName?.toUpperCase()
+    var nullNameInUpperCase = nullName?.uppercase()
 
     // ?: 엘비스 연산자
     // 디폴트 값을 주고 싶다면 사용
@@ -124,5 +128,14 @@ fun nullcheck() {
 
 fun ignoreNulls(str : String?) {
     val mNotNull : String = str!!
-    val upper = mNotNull.toUpperCase()
+    val upper = mNotNull.uppercase()
+
+    val email : String? = "xixouxx@gmail.com"
+//    val email : String? = null
+    // email이 null이 아니면 let함수 실행
+    email?.let{
+        println("My email is ${email}")
+    }
 }
+
+// 8. class
