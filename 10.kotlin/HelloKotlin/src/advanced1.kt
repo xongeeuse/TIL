@@ -37,5 +37,28 @@ val pizzaIsGreat : String.() -> String = {
 
 fun extendString(name : String, age : Int) : String {
     val introduceMyself : String.(Int) -> String = { "I am ${this} and ${it} years old."}
+        // this가 가리키는 것 => 확장함수 콜하는 오브젝트
+        // it => 하나 들어가는 파라미터의 경우, it으로 생략 가능
     return name.introduceMyself(age)
+}
+
+// 람다의 Return
+// 마지막 한 줄이 반환값 의미
+
+// input param은 여러가지일 수 있으니까 (Int)와 같이 소괄호 묶어주기
+// return 값은 type이 하나니까 String 처럼 안써도 돼
+val calculateGrade : (Int) -> String = {
+    when(it) {
+        in 0..40 -> "fail"
+        in 41..70 -> "pass"
+        in 71..100 -> "perfect!"
+        // Int값 인자로 받아 String 반환해야 하는데
+        // 위 범위 외의 값 있을 수 있으니까 else 반드시 작성
+        else -> "Error"
+    }
+}
+
+// 람다를 표현하는 여러가지 방법
+fun invokeLambda(lambda: (Double) -> Boolean) : Boolean {
+    return lambda(5.2343)
 }
