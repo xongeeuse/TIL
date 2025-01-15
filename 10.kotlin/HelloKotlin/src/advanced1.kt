@@ -28,6 +28,19 @@ fun main() {
     println(b.pizzaIsGreat())
 
     println(extendString("Ariana", 27))
+
+    val lambda = {number : Double ->
+        number == 4.3213
+//        number == 5.2343
+    }
+
+    println(invokeLambda(lambda))
+    println(invokeLambda({it > 3.22}))
+
+    // fun의 마지막 param이 람다식일 때는 아래와 같이 표현 가능
+    // 생략하고 중괄호로 표현
+    println(invokeLambda { it > 3.22 })
+
 }
 
 // 확장함수
@@ -62,3 +75,6 @@ val calculateGrade : (Int) -> String = {
 fun invokeLambda(lambda: (Double) -> Boolean) : Boolean {
     return lambda(5.2343)
 }
+
+
+// 익명 내부 함수
