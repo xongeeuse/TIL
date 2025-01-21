@@ -3,7 +3,7 @@ import requests
 import folium
 import math
 
-API_KEY = "2DWqj8ePnX9BcqL1xpG5B5N3Gfz32SwM4epGdQ9r"
+
 
 
 # TMAP API 호출 함수
