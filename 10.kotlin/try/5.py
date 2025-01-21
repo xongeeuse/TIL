@@ -5,7 +5,7 @@ import folium
 
 # 일단 거리만큼 경로 나눠서 요청하고 지도에 표시하기 성공
 
-API_KEY = "2DWqj8ePnX9BcqL1xpG5B5N3Gfz32SwM4epGdQ9r"
+
 
 
 def generate_coordinates(start_lat, start_lon, total_distance_km, num_points):
