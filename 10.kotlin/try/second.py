@@ -102,7 +102,7 @@ plt.show()
 # import requests
 #
 # # TMAP API Key
-# API_KEY = "2DWqj8ePnX9BcqL1xpG5B5N3Gfz32SwM4epGdQ9r"
+
 #
 # # 출발지, 도착지, 경유지 정보
 # start_x = 126.9780  # 출발지 경도
