@@ -3,7 +3,7 @@ import requests
 import folium
 import matplotlib.pyplot as plt
 
-API_KEY = "2DWqj8ePnX9BcqL1xpG5B5N3Gfz32SwM4epGdQ9r"
+
 
 # GPS 좌표 변환 및 스케일링 함수
 def convert_drawing_to_scaled_gps(xdata, ydata, image_width, image_height, gps_bounds, total_distance_km):
