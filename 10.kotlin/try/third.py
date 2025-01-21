@@ -4,7 +4,7 @@ import requests
 import folium
 
 
-API_KEY = "2DWqj8ePnX9BcqL1xpG5B5N3Gfz32SwM4epGdQ9r"
+
 
 def call_tmap_api(data):
     url = "https://apis.openapi.sk.com/tmap/routes/pedestrian"
