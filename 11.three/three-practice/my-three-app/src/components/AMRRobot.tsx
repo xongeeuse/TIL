@@ -56,6 +56,6 @@ export function createAMRRobot(scene: THREE.Scene, position: [number, number, nu
   group.position.set(...position);
   scene.add(group);
 
-  // 🔁 애니메이션 등록용으로 rollerGroup 반환
-  return group; // ✅ 전체 그룹 반환
+  // 🔁 애니메이션 등록용으로 rollerGroup 반환.
+  return group; // ✅ 전체 그룹 반환 
 }
